@@ -1,54 +1,48 @@
-const { admin } = require('../models/tAdmin.js'); 
+const tAdmin = require('../_data/tAdmin');
+const Sequelize = require('../_data/_config/dbContext').sequelize;
+const DataTypes = require('../_data/_config/dbContext').DataTypes;
+const IAdminRepository = require('../_interface/iAdminRepository');
 
-const tAdminRepository = {
-  async createAdmin(name, email, password) {
-    try {
-      const newAdmin = await admin.create({ name, email, password });
-      return newAdmin;
-    } catch (error) {
-      throw new Error('Erro ao criar um admin');
+class AdminRepository extends IAdminRepository {
+    constructor() {
+        super();
     }
-  },
 
-  async gettAdminById(id) {
-    try {
-      const foundAdmin = await admin.findByPk(id);
-      return foundAdmin;
-    } catch (error) {
-      throw new Error('Erro ao encontrar o admin');
+    async addAdmin(name, email, password) {
+        try {
+            await Sequelize.authenticate();
+            const row = await tAdmin(Sequelize, DataTypes).create({
+                name: name,
+                email: email,
+                password: password
+            });
+            console.log("Adicionei um novo admin!");
+            return row;
+        } catch (err) {
+            console.error(err);
+            throw err;
+        }
     }
-  },
 
-  async updatetAdmin(id, newData) {
-    try {
-      const [updatedRowsCount, updatedAdmin] = await admin.update(newData, {
-        where: { id },
-        returning: true,
-      });
-      if (updatedRowsCount === 0) throw new Error('Admin não encontrado');
-      return updatedAdmin[0];
-    } catch (error) {
-      throw new Error('Erro ao atualizar o admin');
+    async getAdminById(id) {
+        try {
+            const row = await tAdmin(Sequelize, DataTypes).findByPk(id);
+            return row;
+        } catch (err) {
+            console.error(err);
+            throw err;
+        }
     }
-  },
 
-  async deletetAdmin(id) {
-    try {
-      const deletedRowCount = await admin.destroy({ where: { id } });
-      if (deletedRowCount === 0) throw new Error('Admin não encontrado');
-    } catch (error) {
-      throw new Error('Erro ao excluir o admin');
+    async getAllAdmins() {
+        try {
+            const rows = await tAdmin(Sequelize, DataTypes).findAll();
+            return rows;
+        } catch (err) {
+            console.error(err);
+            throw err;
+        }
     }
-  },
-
-  async getAlltAdmins() {
-    try {
-      const allAdmins = await admin.findAll();
-      return allAdmins;
-    } catch (error) {
-      throw new Error('Erro ao obter todos os admins');
-    }
-  },
-};
+}
 
 module.exports = AdminRepository;
