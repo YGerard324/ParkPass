@@ -15,12 +15,14 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.FLOAT,
           allowNull: false,
         },
-        // registros_id: {
-        //   foreignKey: 'registros_id',
-        // },
-        // tipoPagamento_id: {
-        //   foreignKey: 'tipoPagamento_id',
-        // },
+        registros_id: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
+        tipoPagamento_id: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
       },
       { timestamps: false }
     );

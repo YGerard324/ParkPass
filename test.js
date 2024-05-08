@@ -1,19 +1,8 @@
-const ProductRepository = require('./_data_acess/productRepository');
+// const AdminRepository = require("./repositories/AdminRepository");
+const EstacionamentoRepository = require("./repositories/EstacionamentoRepository");
 
-async function testProductRepository() {
-    const repository = new ProductRepository();
+let estacionamentoRepository = new EstacionamentoRepository();
+// let adminRepository = new AdminRepository();
+// adminRepository.add({ name: "asd", email: "asd", password: "password" });
+estacionamentoRepository.create({ name: "thigaspark", cnpj: "5135416345", logradouro:"213214", bairro: "dwadafw", cidade:"FSA", cep:"5165213" });
 
-    try {
-        const newProduct = await repository.addProduct('Coca', 4.5);
-        console.log('Novo produto adicionado:', newProduct);
-
-        // Obter um produto pelo código (exemplo: código 1)
-        const product = await repository.getProduct(1);
-        console.log('Produto encontrado:', product);
-    } catch (error) {
-        console.error('Erro:', error);
-    }
-}
-
-// Chamando a função de teste
-testProductRepository();

@@ -19,12 +19,14 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.DATE,
           allowNull: false,
         },
-        // vaga_id: {
-        //   foreignKey: 'vaga_id',
-        // },
-        // cliente_id: {
-        //   foreignKey: 'cliente_id',
-        // },
+        vaga_id: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
+        cliente_id: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
       },
       { timestamps: false }
     );
