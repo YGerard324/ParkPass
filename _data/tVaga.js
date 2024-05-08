@@ -19,9 +19,10 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.BOOL,
           allowNull: false,
         },
-        // estacionamento_id: {
-        //   foreignKey: 'estacionamento_id',
-        // },
+        estacionamento_id: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
       },
       { timestamps: false }
     );

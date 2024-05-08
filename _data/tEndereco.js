@@ -24,9 +24,10 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.STRING,
           allowNull: false,
         },
-        // cliente_id: {
-        //   foreignKey: 'cliente_id',
-        // },
+        cliente_id: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
       },
       { timestamps: false }
     );

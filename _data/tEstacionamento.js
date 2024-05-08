@@ -1,7 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    console.log("Também estive aqui!");
-
-    const estacionamento = sequelize.define(
+    const Estacionamento = sequelize.define(
       'estacionamento',
       {
         id: {
@@ -33,12 +31,13 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.STRING,
           allowNull: false,
         },
-        // admin_id: {
-        //   foreignKey: 'admin_id',
-        // },
+        admin_id: {
+          type: DataTypes.INTEGER,
+          // allowNull: false,
+        },
       },
-      { timestamps: false }
+      { timestamps: false, freezeTableName: true }
     );
-    return estacionamento;
+    return Estacionamento;
   };
   

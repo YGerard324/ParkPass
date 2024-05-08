@@ -1,20 +1,22 @@
-const tProducts = require('../_data/tProducts');
+const tAdmin = require('../_data/tAdmin');
 const Sequelize = require('../_data/_config/dbContext').sequelize;
 const DataTypes = require('../_data/_config/dbContext').DataTypes;
-const IProductRepository = require('../_interface/iProductRepository');
-class ProductRepository extends IProductRepository {
-    
+const IAdminRepository = require('../_interface/iAdminRepository');
+
+class AdminRepository extends IAdminRepository {
     constructor() {
         super();
     }
-    async addProduct(name, value) {
+
+    async addAdmin(name, email, password) {
         try {
             await Sequelize.authenticate();
-            const row = await tProducts(Sequelize, DataTypes).create({
+            const row = await tAdmin(Sequelize, DataTypes).create({
                 name: name,
-                value: value
+                email: email,
+                password: password
             });
-            console.log("passei aqui");
+            console.log("Adicionei um novo admin!");
             return row;
         } catch (err) {
             console.error(err);
@@ -22,13 +24,9 @@ class ProductRepository extends IProductRepository {
         }
     }
 
-    async getProduct(code) {
+    async getAdminById(id) {
         try {
-            const row = await this.db.productModel.findOne({
-                where: {
-                    code: code
-                }
-            });
+            const row = await tAdmin(Sequelize, DataTypes).findByPk(id);
             return row;
         } catch (err) {
             console.error(err);
@@ -36,9 +34,9 @@ class ProductRepository extends IProductRepository {
         }
     }
 
-    async getAllProducts(){
+    async getAllAdmins() {
         try {
-            const rows = await this.db.productModel.findAll();
+            const rows = await tAdmin(Sequelize, DataTypes).findAll();
             return rows;
         } catch (err) {
             console.error(err);
@@ -47,4 +45,4 @@ class ProductRepository extends IProductRepository {
     }
 }
 
-module.exports = ProductRepository;
+module.exports = AdminRepository;
