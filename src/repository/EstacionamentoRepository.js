@@ -2,7 +2,7 @@ const { Estacionamento } = require("../data/dbContext");
 
 class EstacionamentoRepository  {
   constructor() {}  
-  async create(estacionamento) {
+  async add(estacionamento) {
     try {
       const newEstacionamento = await Estacionamento.create(estacionamento);
       return newEstacionamento;

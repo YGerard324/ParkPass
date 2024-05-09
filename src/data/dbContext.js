@@ -6,13 +6,16 @@ console.log("Dialeto: " + dbConfig.DIALECT);
 const sequelize = new Sequelize(
   dbConfig.DB,
   dbConfig.USERNAME,
-  dbConfig.PASSWORD,
+  // dbConfig.PASSWORD,
   {
     host: dbConfig.HOST,
     dialect: dbConfig.DIALECT,
     port: dbConfig.PORT,
   }
 );
+
+const Admin = require("../data/Admin")(sequelize, DataTypes);
+const Estacionamento = require("../data/Estacionamento")(sequelize, DataTypes);
 
 sequelize
   .authenticate()
@@ -23,8 +26,6 @@ sequelize
     console.log("Erro ao tentar conectar: " + err);
   });
 
-const Admin = require("../../_data/tAdmin")(sequelize, DataTypes);
-
 sequelize
   .sync({ alter: true })
   .then(() => {
@@ -34,4 +35,4 @@ sequelize
     console.log("Erros: " + err);
   });
 
-module.exports = { Admin };
+module.exports = { Admin, Estacionamento };

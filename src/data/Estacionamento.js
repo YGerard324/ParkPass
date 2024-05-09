@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     const Estacionamento = sequelize.define(
-      'estacionamento',
+      "estacionamento",
       {
         id: {
           type: DataTypes.INTEGER,
@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         admin_id: {
           type: DataTypes.INTEGER,
-          // allowNull: false,
+          allowNull: false,
         },
       },
       { timestamps: false, freezeTableName: true }
