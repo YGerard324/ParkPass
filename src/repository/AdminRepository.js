@@ -1,4 +1,4 @@
-const { Admin } = require("../_data/_config/dbContext");
+const { Admin } = require("../data/dbContext");
 
 class AdminRepository {
   constructor() {}

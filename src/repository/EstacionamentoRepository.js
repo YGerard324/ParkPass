@@ -1,4 +1,4 @@
-const { Estacionamento } = require("../_data/_config/dbContext"); 
+const { Estacionamento } = require("../data/dbContext"); 
 
 class EstacionamentoRepository  {
   constructor() {}  
