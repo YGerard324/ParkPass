@@ -1,11 +1,11 @@
-const { Admin } = require("../data/dbContext");
+const { Cliente } = require("../data/dbContext");
 
-class AdminRepository {
+class ClienteRepository {
   constructor() {}
 
-  async add(admin) {
+  async add(cliente) {
     try {
-      const row = await Admin.create(admin);
+      const row = await Cliente.create(cliente);
       return row;
     } catch (err) {
       console.error(err);
@@ -13,9 +13,9 @@ class AdminRepository {
     }
   }
 
-  async getAdminById(id) {
+  async getClienteById(id) {
     try {
-      const row = await Admin(Sequelize, DataTypes).findByPk(id);
+      const row = await Cliente(Sequelize, DataTypes).findByPk(id);
       return row;
     } catch (err) {
       console.error(err);
@@ -25,7 +25,7 @@ class AdminRepository {
 
   async getAll() {
     try {
-      const rows = await Admin.findAll();
+      const rows = await Cliente.findAll();
       return rows;
     } catch (err) {
       console.error(err);
@@ -34,4 +34,4 @@ class AdminRepository {
   }
 }
 
-module.exports = AdminRepository;
+module.exports = ClienteRepository;

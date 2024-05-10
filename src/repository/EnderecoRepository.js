@@ -1,14 +1,16 @@
-const { endereco } = require('../models/tEndereco.js'); 
+const { Endereco } = require('../data/dbContext'); 
 
-const EnderecoRepository = {
-  async createtEndereco(logradouro, bairro, cidade, cep) {
+class EnderecoRepository  {
+  constructor() {}
+  async add(endereco) {
     try {
-      const newEndereco = await endereco.create({ logradouro, bairro, cidade, cep });
+      const newEndereco = await Endereco.create(endereco);
       return newEndereco;
     } catch (error) {
-      throw new Error('Erro ao criar um endereço');
+      console.log(error);
+      throw error;
     }
-  },
+  }
 
   async getEnderecoById(id) {
     try {
@@ -17,9 +19,9 @@ const EnderecoRepository = {
     } catch (error) {
       throw new Error('Erro ao encontrar o endereço');
     }
-  },
+  }
 
-  async updateEndereco(id, newData) {
+  async update(id, newData) {
     try {
       const [updatedRowsCount, updatedEndereco] = await endereco.update(newData, {
         where: { id },
@@ -30,16 +32,16 @@ const EnderecoRepository = {
     } catch (error) {
       throw new Error('Erro ao atualizar o endereço');
     }
-  },
+  }
 
-  async deleteEndereco(id) {
+  async delete(id) {
     try {
       const deletedRowCount = await endereco.destroy({ where: { id } });
       if (deletedRowCount === 0) throw new Error('Endereço não encontrado');
     } catch (error) {
       throw new Error('Erro ao excluir o endereço');
     }
-  },
+  }
 
   async getAllEnderecos() {
     try {
@@ -48,7 +50,8 @@ const EnderecoRepository = {
     } catch (error) {
       throw new Error('Erro ao obter todos os endereços');
     }
-  },
-};
+  }
+}
+
 
 module.exports = EnderecoRepository;

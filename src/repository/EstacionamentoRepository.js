@@ -7,7 +7,8 @@ class EstacionamentoRepository  {
       const newEstacionamento = await Estacionamento.create(estacionamento);
       return newEstacionamento;
     } catch (error) {
-      throw new Error('Erro ao criar um estacionamento');
+      console.log(error);
+      throw error;
     }
   }
 

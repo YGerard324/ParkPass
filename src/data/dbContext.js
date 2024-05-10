@@ -6,7 +6,7 @@ console.log("Dialeto: " + dbConfig.DIALECT);
 const sequelize = new Sequelize(
   dbConfig.DB,
   dbConfig.USERNAME,
-  // dbConfig.PASSWORD,
+  dbConfig.PASSWORD,
   {
     host: dbConfig.HOST,
     dialect: dbConfig.DIALECT,
@@ -16,6 +16,10 @@ const sequelize = new Sequelize(
 
 const Admin = require("../data/Admin")(sequelize, DataTypes);
 const Estacionamento = require("../data/Estacionamento")(sequelize, DataTypes);
+const Endereco = require("../data/Endereco")(sequelize, DataTypes);
+const Cliente = require("../data/Cliente")(sequelize, DataTypes);
+
+
 
 sequelize
   .authenticate()
@@ -35,4 +39,20 @@ sequelize
     console.log("Erros: " + err);
   });
 
-module.exports = { Admin, Estacionamento };
+  Admin.hasMany(Estacionamento, {
+    foreignKey: 'admin_id',
+  });
+
+  Estacionamento.belongsTo(Admin, {
+    foreignKey: 'id',
+  });
+  
+  Cliente.hasMany(Endereco, {
+    foreignKey: 'cliente_id',
+  });
+
+  Endereco.belongsTo(Cliente, {
+    foreignKey: 'id',
+  });
+
+module.exports = { Admin, Estacionamento, Endereco, Cliente};

@@ -1,8 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
-    console.log("Também estive aqui!");
 
     const cliente = sequelize.define(
-      'cliente',
+      "cliente",
       {
         id: {
           type: DataTypes.INTEGER,
@@ -37,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false,
         },
       },
-      { timestamps: false }
+      { timestamps: false, freezeTableName: true }
     );
     return cliente;
   };

@@ -1,8 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
-    console.log("Também estive aqui!");
 
-    const endereco = sequelize.define(
-      'endereco',
+    const Endereco = sequelize.define(
+      "endereco",
       {
         id: {
           type: DataTypes.INTEGER,
@@ -29,8 +28,8 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false,
         },
       },
-      { timestamps: false }
+      { timestamps: false, freezeTableName: true }
     );
-    return endereco;
+    return Endereco;
   };
   
