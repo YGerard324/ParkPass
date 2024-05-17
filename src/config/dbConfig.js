@@ -3,6 +3,6 @@ module.exports = {
     USERNAME: "root",
     PASSWORD: "",
     DB: "parkPass",
-    PORT: "3306",
+    PORT: "3307",
     DIALECT: 'mysql'
 }

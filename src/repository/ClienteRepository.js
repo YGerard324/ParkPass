@@ -1,7 +1,10 @@
+const ClienteRepositoryInterface = require("../interface/ClienteRepositoryInterface");
 const { Cliente } = require("../data/dbContext");
 
-class ClienteRepository {
-  constructor() {}
+class ClienteRepository extends ClienteRepositoryInterface {
+  constructor() {
+    super();
+  }
 
   async add(cliente) {
     try {
@@ -13,7 +16,7 @@ class ClienteRepository {
     }
   }
 
-  async getClienteById(id) {
+  async getById(id) {
     try {
       const row = await Cliente(Sequelize, DataTypes).findByPk(id);
       return row;

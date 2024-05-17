@@ -1,7 +1,11 @@
+const PagamentoRepositoryInterface = require("../interface/PagamentoRepositoryInterface");
 const { Pagamento } = require("../data/dbContext");
 
-class PagamentoRepository {
-  constructor() {}
+
+class PagamentoRepository extends PagamentoRepositoryInterface {
+  constructor() {
+    super();
+  }
 
   async add(pagamento) {
     try {
@@ -13,7 +17,7 @@ class PagamentoRepository {
     }
   }
 
-  async getPagamentoById(id) {
+  async getById(id) {
     try {
       const row = await Pagamento(Sequelize, DataTypes).findByPk(id);
       return row;

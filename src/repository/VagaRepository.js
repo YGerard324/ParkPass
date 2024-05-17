@@ -1,7 +1,10 @@
+const VagaRepositoryInterface = require("../interface/VagaRepositoryInterface");
 const { Vaga } = require("../data/dbContext");
 
-class VagaRepository {
-  constructor() {}
+class VagaRepository extends VagaRepositoryInterface {
+  constructor() {
+    super();
+  }
 
   async add(vaga) {
     try {
@@ -13,7 +16,7 @@ class VagaRepository {
     }
   }
 
-  async getVagaById(id) {
+  async getId(id) {
     try {
       const row = await Vaga(Sequelize, DataTypes).findByPk(id);
       return row;

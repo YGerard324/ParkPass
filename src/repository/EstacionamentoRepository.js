@@ -1,7 +1,10 @@
+const EstacionamentoRepositoryInterface = require("../interface/EstacionamentoRepositoryInterface");
 const { Estacionamento } = require("../data/dbContext"); 
 
-class EstacionamentoRepository  {
-  constructor() {}  
+class EstacionamentoRepository extends EstacionamentoRepositoryInterface  {
+  constructor() {
+    super();
+  }  
   async add(estacionamento) {
     try {
       const newEstacionamento = await Estacionamento.create(estacionamento);
@@ -12,7 +15,7 @@ class EstacionamentoRepository  {
     }
   }
 
-  async getEstacionamentoById(id) {
+  async getById(id) {
     try {
       const foundEstacionamento = await Estacionamento.findByPk(id);
       return foundEstacionamento;
@@ -43,7 +46,7 @@ class EstacionamentoRepository  {
     }
   }
 
-  async getAllEstacionamentos() {
+  async getAll() {
     try {
       const allEstacionamentos = await Estacionamento.findAll();
       return allEstacionamentos;

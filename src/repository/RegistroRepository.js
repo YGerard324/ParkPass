@@ -1,7 +1,11 @@
+const RegistroRepositoryInterface = require("../interface/RegistroRepositoryInterface");
 const { Registro } = require("../data/dbContext");
 
-class RegistroRepository {
-  constructor() {}
+
+class RegistroRepository extends RegistroRepositoryInterface {
+  constructor() {
+    super();
+  }
 
   async add(registro) {
     try {
@@ -13,7 +17,7 @@ class RegistroRepository {
     }
   }
 
-  async getRegistroById(id) {
+  async getById(id) {
     try {
       const row = await Registro(Sequelize, DataTypes).findByPk(id);
       return row;

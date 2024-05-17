@@ -1,7 +1,10 @@
+const EnderecoRepositoryInterface = require("../interface/EnderecoRepositoryInterface");
 const { Endereco } = require('../data/dbContext'); 
 
-class EnderecoRepository  {
-  constructor() {}
+class EnderecoRepository extends EnderecoRepositoryInterface {
+  constructor() {
+    super();
+  }
   async add(endereco) {
     try {
       const newEndereco = await Endereco.create(endereco);
@@ -12,9 +15,9 @@ class EnderecoRepository  {
     }
   }
 
-  async getEnderecoById(id) {
+  async getById(id) {
     try {
-      const foundEndereco = await endereco.findByPk(id);
+      const foundEndereco = await Endereco.findByPk(id);
       return foundEndereco;
     } catch (error) {
       throw new Error('Erro ao encontrar o endereço');
@@ -23,7 +26,7 @@ class EnderecoRepository  {
 
   async update(id, newData) {
     try {
-      const [updatedRowsCount, updatedEndereco] = await endereco.update(newData, {
+      const [updatedRowsCount, updatedEndereco] = await Endereco.update(newData, {
         where: { id },
         returning: true,
       });
@@ -36,16 +39,16 @@ class EnderecoRepository  {
 
   async delete(id) {
     try {
-      const deletedRowCount = await endereco.destroy({ where: { id } });
+      const deletedRowCount = await Endereco.destroy({ where: { id } });
       if (deletedRowCount === 0) throw new Error('Endereço não encontrado');
     } catch (error) {
       throw new Error('Erro ao excluir o endereço');
     }
   }
 
-  async getAllEnderecos() {
+  async getAll() {
     try {
-      const allEnderecos = await endereco.findAll();
+      const allEnderecos = await Endereco.findAll();
       return allEnderecos;
     } catch (error) {
       throw new Error('Erro ao obter todos os endereços');

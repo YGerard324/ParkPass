@@ -1,7 +1,10 @@
+const AdminRepositoryInterface = require("../interface/AdminRepositoryInterface");
 const { Admin } = require("../data/dbContext");
 
-class AdminRepository {
-  constructor() {}
+class AdminRepository extends AdminRepositoryInterface {
+  constructor() {
+    super();
+  }
 
   async add(admin) {
     try {

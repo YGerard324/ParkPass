@@ -1,54 +1,20 @@
-const { tipoPagamento } = require('../models'); 
+class TipoPagamentoRepositoryInterface {
+  constructor() {
+    if (new.target === RegistroRepositoryInterface) {
+        throw new Error("Não foi possível instanciar RegistroRepositoryInterface.");
+      }
+}
+  async add() {
+    throw new Error("Metodo 'add()' precisa ser implementado.");
+  }
 
-const TipoPagamentoRepository = {
-  async createTipoPagamento(descricao) {
-    try {
-      const newTipoPagamento = await tipoPagamento.create({ descricao });
-      return newTipoPagamento;
-    } catch (error) {
-      throw new Error('Erro ao criar um tipo de pagamento');
-    }
-  },
+  async getById(id) {
+    throw new Error("Metodo 'getById()' precisa ser implementado.");
+  }
 
-  async getTipoPagamentoById(id) {
-    try {
-      const foundTipoPagamento = await tipoPagamento.findByPk(id);
-      return foundTipoPagamento;
-    } catch (error) {
-      throw new Error('Erro ao encontrar o tipo de pagamento');
-    }
-  },
+  async getAll() {
+    throw new Error("Metodo 'getAll()' precisa ser implementado.");
+  }
+}
 
-  async updateTipoPagamento(id, newData) {
-    try {
-      const [updatedRowsCount, updatedTipoPagamento] = await tipoPagamento.update(newData, {
-        where: { id },
-        returning: true,
-      });
-      if (updatedRowsCount === 0) throw new Error('Tipo de pagamento não encontrado');
-      return updatedTipoPagamento[0];
-    } catch (error) {
-      throw new Error('Erro ao atualizar o tipo de pagamento');
-    }
-  },
-
-  async deleteTipoPagamento(id) {
-    try {
-      const deletedRowCount = await tipoPagamento.destroy({ where: { id } });
-      if (deletedRowCount === 0) throw new Error('Tipo de pagamento não encontrado');
-    } catch (error) {
-      throw new Error('Erro ao excluir o tipo de pagamento');
-    }
-  },
-
-  async getAllTipoPagamentos() {
-    try {
-      const allTipoPagamentos = await tipoPagamento.findAll();
-      return allTipoPagamentos;
-    } catch (error) {
-      throw new Error('Erro ao obter todos os tipos de pagamento');
-    }
-  },
-};
-
-module.exports = TipoPagamentoRepository;
+module.exports = TipoPagamentoRepositoryInterface;

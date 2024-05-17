@@ -1,48 +1,22 @@
-const tAdmin = require('../_data/tAdmin');
-const Sequelize = require('../_data/_config/dbContext').sequelize;
-const DataTypes = require('../_data/_config/dbContext').DataTypes;
-const IAdminRepository = require('../_interface/iAdminRepository');
-
-class AdminRepository extends IAdminRepository {
+class AdminRepositoryInterface{
     constructor() {
-        super();
+        if (new.target === AdminRepositoryInterface) {
+            throw new Error("Não foi possível instanciar IAdminRepository.");
+          }
     }
 
-    async addAdmin(name, email, password) {
-        try {
-            await Sequelize.authenticate();
-            const row = await tAdmin(Sequelize, DataTypes).create({
-                name: name,
-                email: email,
-                password: password
-            });
-            console.log("Adicionei um novo admin!");
-            return row;
-        } catch (err) {
-            console.error(err);
-            throw err;
-        }
+    async add() {
+        throw new Error("Metodo 'add()' precisa ser implementado.");
+            
     }
 
-    async getAdminById(id) {
-        try {
-            const row = await tAdmin(Sequelize, DataTypes).findByPk(id);
-            return row;
-        } catch (err) {
-            console.error(err);
-            throw err;
-        }
+    async getById() {
+        throw new Error("Metodo 'getById()' precisa ser implementado.");
     }
 
-    async getAllAdmins() {
-        try {
-            const rows = await tAdmin(Sequelize, DataTypes).findAll();
-            return rows;
-        } catch (err) {
-            console.error(err);
-            throw err;
-        }
+    async getAll() {
+        throw new Error("Metodo 'getAll()' precisa ser implementado.");
     }
 }
 
-module.exports = AdminRepository;
+module.exports = AdminRepositoryInterface;
