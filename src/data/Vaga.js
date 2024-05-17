@@ -1,8 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
-    console.log("Também estive aqui!");
 
-    const vaga = sequelize.define(
-      'vaga',
+    const Vaga = sequelize.define(
+      "vaga",
       {
         id: {
           type: DataTypes.INTEGER,
@@ -16,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false,
         },
         cobertura: {
-          type: DataTypes.BOOL,
+          type: DataTypes.BOOLEAN,
           allowNull: false,
         },
         estacionamento_id: {
@@ -26,6 +25,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       { timestamps: false, freezeTableName: true }
     );
-    return vaga;
+    return Vaga;
   };
   

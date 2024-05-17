@@ -1,8 +1,9 @@
-module.exports = (sequelize, DataTypes) => {
-    console.log("Também estive aqui!");
+const Pagamento = require("./Pagamento");
 
-    const vaga = sequelize.define(
-      'vaga',
+module.exports = (sequelize, DataTypes) => {
+
+    const Registro = sequelize.define(
+      "registro",
       {
         id: {
           type: DataTypes.INTEGER,
@@ -27,9 +28,13 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
+        pagamento_id: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
       },
       { timestamps: false, freezeTableName: true }
     );
-    return vaga;
+    return Registro;
   };
   

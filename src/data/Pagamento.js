@@ -1,8 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
-    console.log("Também estive aqui!");
-
+  
     const pagamento = sequelize.define(
-      'pagamento',
+      "pagamento",
       {
         id: {
           type: DataTypes.INTEGER,
@@ -13,10 +12,6 @@ module.exports = (sequelize, DataTypes) => {
         },
         valor: {
           type: DataTypes.FLOAT,
-          allowNull: false,
-        },
-        registros_id: {
-          type: DataTypes.INTEGER,
           allowNull: false,
         },
         tipoPagamento_id: {

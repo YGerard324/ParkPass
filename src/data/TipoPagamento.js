@@ -1,8 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
-    console.log("Também estive aqui!");
 
-    const tipoPagamento = sequelize.define(
-      'tipoPagamento',
+    const TipoPagamento = sequelize.define(
+      "tipoPagamento",
       {
         id: {
           type: DataTypes.INTEGER,
@@ -11,13 +10,13 @@ module.exports = (sequelize, DataTypes) => {
           autoIncrement: true,
           unique: true,
         },
-        descrição: {
-          type: DataTypes.STRING,
+        forma_pagamento: {
+          type: DataTypes.ENUM('DINHEIRO', 'CARTAO DE CREDITO', 'BOLETO', 'PIX', 'CARTAO DE DEBITO', 'OUTROS'),
           allowNull: false,
         },
       },
       { timestamps: false, freezeTableName: true }
     );
-    return tipoPagamento;
+    return TipoPagamento;
   };
   
