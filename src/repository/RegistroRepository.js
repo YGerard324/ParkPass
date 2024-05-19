@@ -7,23 +7,50 @@ class RegistroRepository extends RegistroRepositoryInterface {
     super();
   }
 
-  async add(registro) {
+  async add(req) {
     try {
-      const row = await Registro.create(registro);
+      const row = await Registro.create(req);
       return row;
-    } catch (err) {
-      console.error(err);
-      throw err;
+    } catch (error) {
+      throw new Error("Erro ao criar um Registro");
+    }
+  }
+
+  async update(req) {
+    const { id } = req.params;
+    const { body } = req;    try {
+      const [rowCount, update] = await Registro.update(body, {
+        where: { id },
+        returning: true,
+      });
+      if (rowCount === 0) throw new Error("Registro não encontrado");
+      return update[0];
+    } catch (error) {
+      throw new Error("Erro ao atualizar o Registro");
+    }
+  }
+
+  async delete(req) {
+    const { id } = req;
+    try {
+      const deletedRow = await Registro.destroy({
+        where: { id },
+        returning: true,
+      });
+      if (deletedRow === 0) throw new Error("Registro não encontrado");
+    } catch (error) {
+      throw new Error("Erro ao excluir o Registro");
     }
   }
 
   async getById(id) {
     try {
-      const row = await Registro(Sequelize, DataTypes).findByPk(id);
-      return row;
-    } catch (err) {
-      console.error(err);
-      throw err;
+      const get = await Registro.findOne({
+        where: { id },
+      });
+      return get;
+    } catch (error) {
+      throw new Error("Erro ao encontrar o Registro");
     }
   }
 

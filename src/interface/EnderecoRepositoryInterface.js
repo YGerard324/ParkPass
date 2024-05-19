@@ -1,7 +1,9 @@
-class EnderecoRepositoryInterface  {
+class EnderecoRepositoryInterface {
   constructor() {
     if (new.target === EnderecoRepositoryInterface) {
-      throw new Error("Não foi possível instanciar EnderecoRepositoryInterface.");
+      throw new Error(
+        "Não foi possível instanciar EnderecoRepositoryInterface."
+      );
     }
   }
   async add() {
@@ -11,19 +13,15 @@ class EnderecoRepositoryInterface  {
   async getById() {
     throw new Error("Metodo 'getById()' precisa ser implementado.");
   }
-
-  async update() {
-    throw new Error("Metodo 'update()' precisa ser implementado.");
-  }
-
-  async delete() {
-    throw new Error("Metodo 'delete()' precisa ser implementado.");
-  }
-
   async getAll() {
     throw new Error("Metodo 'getAll()' precisa ser implementado.");
   }
+  async update() {
+    throw new Error("Metodo 'update()' precisa ser implementado.");
+  }
+  async delete() {
+    throw new Error("Metodo 'delete()' precisa ser implementado.");
+  }
 }
-
 
 module.exports = EnderecoRepositoryInterface;

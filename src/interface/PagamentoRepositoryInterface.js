@@ -1,10 +1,11 @@
 class PagamentoRepositoryInterface {
-
   constructor() {
     if (new.target === PagamentoRepositoryInterface) {
-        throw new Error("Não foi possível instanciar PagamentoRepositoryInterface.");
-      }
-}
+      throw new Error(
+        "Não foi possível instanciar PagamentoRepositoryInterface."
+      );
+    }
+  }
 
   async add() {
     throw new Error("Metodo 'add()' precisa ser implementado.");
@@ -13,11 +14,15 @@ class PagamentoRepositoryInterface {
   async getById() {
     throw new Error("Metodo 'getById()' precisa ser implementado.");
   }
-
   async getAll() {
     throw new Error("Metodo 'getAll()' precisa ser implementado.");
-}
-
+  }
+  async update() {
+    throw new Error("Metodo 'update()' precisa ser implementado.");
+  }
+  async delete() {
+    throw new Error("Metodo 'delete()' precisa ser implementado.");
+  }
 }
 
 module.exports = PagamentoRepositoryInterface;

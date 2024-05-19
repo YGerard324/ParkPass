@@ -5,53 +5,61 @@ class EnderecoRepository extends EnderecoRepositoryInterface {
   constructor() {
     super();
   }
-  async add(endereco) {
+  async add(req) {
     try {
-      const newEndereco = await Endereco.create(endereco);
-      return newEndereco;
+      const row = await Endereco.create(req);
+      return row;
     } catch (error) {
-      console.log(error);
-      throw error;
+      throw new Error("Erro ao criar um Endereco");
+    }
+  }
+
+  async update(req) {
+    const { id } = req.params;
+    const { body } = req;
+    try {
+      const [rowCount, update] = await Endereco.update(body, {
+        where: { id },
+        returning: true,
+      });
+      if (rowCount === 0) throw new Error("Endereco não encontrado");
+      return update[0];
+    } catch (error) {
+      throw new Error("Erro ao atualizar o Endereco");
+    }
+  }
+
+  async delete(req) {
+    const { id } = req;
+    try {
+      const deletedRow = await Endereco.destroy({
+        where: { id },
+        returning: true,
+      });
+      if (deletedRow === 0) throw new Error("Endereco não encontrado");
+    } catch (error) {
+      throw new Error("Erro ao excluir o Endereco");
     }
   }
 
   async getById(id) {
     try {
-      const foundEndereco = await Endereco.findByPk(id);
-      return foundEndereco;
-    } catch (error) {
-      throw new Error('Erro ao encontrar o endereço');
-    }
-  }
-
-  async update(id, newData) {
-    try {
-      const [updatedRowsCount, updatedEndereco] = await Endereco.update(newData, {
+      const get = await Endereco.findOne({
         where: { id },
-        returning: true,
       });
-      if (updatedRowsCount === 0) throw new Error('Endereço não encontrado');
-      return updatedEndereco[0];
+      return get;
     } catch (error) {
-      throw new Error('Erro ao atualizar o endereço');
-    }
-  }
-
-  async delete(id) {
-    try {
-      const deletedRowCount = await Endereco.destroy({ where: { id } });
-      if (deletedRowCount === 0) throw new Error('Endereço não encontrado');
-    } catch (error) {
-      throw new Error('Erro ao excluir o endereço');
+      throw new Error("Erro ao encontrar o Endereco");
     }
   }
 
   async getAll() {
     try {
-      const allEnderecos = await Endereco.findAll();
-      return allEnderecos;
-    } catch (error) {
-      throw new Error('Erro ao obter todos os endereços');
+      const rows = await Endereco.findAll();
+      return rows;
+    } catch (err) {
+      console.error(err);
+      throw err;
     }
   }
 }

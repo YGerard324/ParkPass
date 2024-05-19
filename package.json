@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "npx nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -14,6 +15,7 @@
     "@sequelize/mysql": "^7.0.0-alpha.40",
     "express": "^4.19.2",
     "mysql": "^2.18.1",
+    "nodemon": "^3.1.0",
     "prompt-sync": "^4.2.0",
     "sequelize": "^6.37.3",
     "sequelizer": "^1.1.4"
