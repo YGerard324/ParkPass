@@ -151,7 +151,7 @@ const enderecoRepository = new EnderecoRepository();
 const enderecoApplication = new EnderecoApplication(enderecoRepository);
 const enderecoInterface = new EnderecoInterface(enderecoApplication);
 
-app.get("/endereco", async (req, res) => {
+app.get("/endereco", async (req, res) => { //OK
   try {
     const endereco = await enderecoInterface.getAll();
     res.status(200).send(endereco);
@@ -160,7 +160,7 @@ app.get("/endereco", async (req, res) => {
   }
 });
 
-app.get("/endereco/:id", async (req, res) => {
+app.get("/endereco/:id", async (req, res) => { //OK
   const { id } = req.params;
   try {
     const row = await enderecoInterface.getById(id);
@@ -173,7 +173,7 @@ app.get("/endereco/:id", async (req, res) => {
   }
 });
 
-app.put("/endereco/:id", async (req, res) => {
+app.put("/endereco/:id", async (req, res) => { //OK
   try {
     const row = await enderecoInterface.update(req);
     res.status(200).json({ error: "endereco atualizado com sucesso!" });
@@ -183,7 +183,7 @@ app.put("/endereco/:id", async (req, res) => {
   }
 });
 
-app.put("/endereco", async (req, res) => {
+app.put("/endereco", async (req, res) => { // <-- VERIFICAR
   try {
     await enderecoInterface.update(req.body);
     res.status(200).json({ error: "endereco atualizado com sucesso!" });
@@ -192,7 +192,7 @@ app.put("/endereco", async (req, res) => {
   }
 });
 
-app.delete("/endereco", async (req, res) => {
+app.delete("/endereco", async (req, res) => { //OK
   try {
     await enderecoInterface.delete(req.body);
     res.status(200).json({ error: "endereco atualizado com sucesso!" });
@@ -201,7 +201,7 @@ app.delete("/endereco", async (req, res) => {
   }
 });
 
-app.post("/endereco", async (req, res) => {
+app.post("/endereco", async (req, res) => { // OK
   try {
     await enderecoInterface.add(req.body);
     res.status(200).json({ error: "endereco atualizado com sucesso!" });
@@ -221,7 +221,7 @@ const estacionamentoRepository = new EstacionamentoRepository();
 const estacionamentoApplication = new EstacionamentoApplication(estacionamentoRepository);
 const estacionamentoInterface = new EstacionamentoInterface(estacionamentoApplication);
 
-app.get("/estacionamento", async (req, res) => {
+app.get("/estacionamento", async (req, res) => { //OK
   try {
     const estacionamento = await estacionamentoInterface.getAll();
     res.status(200).send(estacionamento);
@@ -230,7 +230,7 @@ app.get("/estacionamento", async (req, res) => {
   }
 });
 
-app.get("/estacionamento/:id", async (req, res) => {
+app.get("/estacionamento/:id", async (req, res) => { // OK
   const { id } = req.params;
   try {
     const row = await estacionamentoInterface.getById(id);
@@ -243,7 +243,7 @@ app.get("/estacionamento/:id", async (req, res) => {
   }
 });
 
-app.put("/estacionamento/:id", async (req, res) => {
+app.put("/estacionamento/:id", async (req, res) => { //OK
   try {
     const row = await estacionamentoInterface.update(req);
     res.status(200).json({ error: "Estacionamento atualizado com sucesso!" });
@@ -253,7 +253,7 @@ app.put("/estacionamento/:id", async (req, res) => {
   }
 });
 
-app.put("/estacionamento", async (req, res) => {
+app.put("/estacionamento", async (req, res) => { // <-- VERIFICAR
   try {
     await estacionamentoInterface.update(req.body);
     res.status(200).json({ error: "Estacionamento atualizado com sucesso!" });
@@ -262,7 +262,7 @@ app.put("/estacionamento", async (req, res) => {
   }
 });
 
-app.delete("/estacionamento", async (req, res) => {
+app.delete("/estacionamento", async (req, res) => { // OK
   try {
     await estacionamentoInterface.delete(req.body);
     res.status(200).json({ error: "Estacionamento atualizado com sucesso!" });
@@ -271,7 +271,7 @@ app.delete("/estacionamento", async (req, res) => {
   }
 });
 
-app.post("/estacionamento", async (req, res) => {
+app.post("/estacionamento", async (req, res) => { // OK
   try {
     await estacionamentoInterface.add(req.body);
     res.status(200).json({ error: "Estacionamento atualizado com sucesso!" });
@@ -291,7 +291,7 @@ const pagamentoRepository = new PagamentoRepository();
 const pagamentoApplication = new PagamentoApplication(pagamentoRepository);
 const pagamentoInterface = new PagamentoInterface(pagamentoApplication);
 
-app.get("/pagamento", async (req, res) => {
+app.get("/pagamento", async (req, res) => { //OK
   try {
     const pagamento = await pagamentoInterface.getAll();
     res.status(200).send(pagamento);
@@ -300,7 +300,7 @@ app.get("/pagamento", async (req, res) => {
   }
 });
 
-app.get("/pagamento/:id", async (req, res) => {
+app.get("/pagamento/:id", async (req, res) => { //OK
   const { id } = req.params;
   try {
     const row = await pagamentoInterface.getById(id);
@@ -313,7 +313,7 @@ app.get("/pagamento/:id", async (req, res) => {
   }
 });
 
-app.put("/pagamento/:id", async (req, res) => {
+app.put("/pagamento/:id", async (req, res) => { // OK
   try {
     const row = await pagamentoInterface.update(req);
     res.status(200).json({ error: "pagamento atualizado com sucesso!" });
@@ -323,7 +323,7 @@ app.put("/pagamento/:id", async (req, res) => {
   }
 });
 
-app.put("/pagamento", async (req, res) => {
+app.put("/pagamento", async (req, res) => { // <-- VERIFICAR
   try {
     await pagamentoInterface.update(req.body);
     res.status(200).json({ error: "pagamento atualizado com sucesso!" });
@@ -332,7 +332,7 @@ app.put("/pagamento", async (req, res) => {
   }
 });
 
-app.delete("/pagamento", async (req, res) => {
+app.delete("/pagamento", async (req, res) => { // <-- ERRO: TABELA RELACIONADA, PRECISA CASCADE
   try {
     await pagamentoInterface.delete(req.body);
     res.status(200).json({ error: "pagamento atualizado com sucesso!" });
@@ -341,7 +341,7 @@ app.delete("/pagamento", async (req, res) => {
   }
 });
 
-app.post("/pagamento", async (req, res) => {
+app.post("/pagamento", async (req, res) => { // <-- ERRO: TABELA RELACIONADA, PRECISA DE NOVOS REGISTROS
   try {
     await pagamentoInterface.add(req.body);
     res.status(200).json({ error: "pagamento atualizado com sucesso!" });
@@ -362,7 +362,7 @@ const registroApplication = new RegistroApplication(registroRepository);
 const registroInterface = new RegistroInterface(registroApplication);
 
 
-app.get("/registro", async (req, res) => {
+app.get("/registro", async (req, res) => { // OK
   try {
     const registro = await registroInterface.getAll();
     res.status(200).send(registro);
@@ -371,7 +371,7 @@ app.get("/registro", async (req, res) => {
   }
 });
 
-app.get("/registro/:id", async (req, res) => {
+app.get("/registro/:id", async (req, res) => { // OK
   const { id } = req.params;
   try {
     const row = await registroInterface.getById(id);
@@ -384,7 +384,7 @@ app.get("/registro/:id", async (req, res) => {
   }
 });
 
-app.put("/registro/:id", async (req, res) => {
+app.put("/registro/:id", async (req, res) => { //OK
   try {
     const row = await registroInterface.update(req);
     res.status(200).json({ error: "Registro atualizado com sucesso!" });
@@ -394,7 +394,7 @@ app.put("/registro/:id", async (req, res) => {
   }
 });
 
-app.put("/registro", async (req, res) => {
+app.put("/registro", async (req, res) => { // <-- VERIFICAR
   try {
     await registroInterface.update(req.body);
     res.status(200).json({ error: "Registro atualizado com sucesso!" });
@@ -403,7 +403,7 @@ app.put("/registro", async (req, res) => {
   }
 });
 
-app.delete("/registro", async (req, res) => {
+app.delete("/registro", async (req, res) => { // ERRO: TABELA RELACIONADA, PRECISA CASCADE
   try {
     await registroInterface.delete(req.body);
     res.status(200).json({ error: "Registro atualizado com sucesso!" });
@@ -412,7 +412,7 @@ app.delete("/registro", async (req, res) => {
   }
 });
 
-app.post("/registro", async (req, res) => {
+app.post("/registro", async (req, res) => { // <-- ERRO: TABELA RELACIONADA, PRECISA DE OUTROS REGISTROS
   try {
     await registroInterface.add(req.body);
     res.status(200).json({ error: "Registro atualizado com sucesso!" });
@@ -433,7 +433,7 @@ const tipoPagamentoRepository = new TipoPagamentoRepository();
 const tipoPagamentoApplication = new TipoPagamentoApplication(tipoPagamentoRepository);
 const tipoPagamentoInterface = new TipoPagamentoInterface(tipoPagamentoApplication);
 
-app.get("/tipoPagamento", async (req, res) => {
+app.get("/tipoPagamento", async (req, res) => { // OK
   try {
     const tipoPagamento = await tipoPagamentoInterface.getAll();
     res.status(200).send(tipoPagamento);
@@ -442,7 +442,7 @@ app.get("/tipoPagamento", async (req, res) => {
   }
 });
 
-app.get("/tipoPagamento/:id", async (req, res) => {
+app.get("/tipoPagamento/:id", async (req, res) => { // OK
   const { id } = req.params;
   try {
     const row = await tipoPagamentoInterface.getById(id);
@@ -455,7 +455,7 @@ app.get("/tipoPagamento/:id", async (req, res) => {
   }
 });
 
-app.put("/tipoPagamento/:id", async (req, res) => {
+app.put("/tipoPagamento/:id", async (req, res) => { // OK
   try {
     const row = await tipoPagamentoInterface.update(req);
     res.status(200).json({ error: "tipoPagamento atualizado com sucesso!" });
@@ -465,7 +465,7 @@ app.put("/tipoPagamento/:id", async (req, res) => {
   }
 });
 
-app.put("/tipoPagamento", async (req, res) => {
+app.put("/tipoPagamento", async (req, res) => { // <-- VERIFICAR
   try {
     await tipoPagamentoInterface.update(req.body);
     res.status(200).json({ error: "tipoPagamento atualizado com sucesso!" });
@@ -474,7 +474,7 @@ app.put("/tipoPagamento", async (req, res) => {
   }
 });
 
-app.delete("/tipoPagamento", async (req, res) => {
+app.delete("/tipoPagamento", async (req, res) => { // OK
   try {
     await tipoPagamentoInterface.delete(req.body);
     res.status(200).json({ error: "tipoPagamento atualizado com sucesso!" });
@@ -483,7 +483,7 @@ app.delete("/tipoPagamento", async (req, res) => {
   }
 });
 
-app.post("/tipoPagamento", async (req, res) => {
+app.post("/tipoPagamento", async (req, res) => { // OK
   try {
     await tipoPagamentoInterface.add(req.body);
     res.status(200).json({ error: "tipoPagamento atualizado com sucesso!" });
