@@ -59,24 +59,23 @@ class App {
         }
         try {
             let enderecoRepository = new EnderecoRepository();
-
-                let endereco = {
-                    logradouro: faker.location.streetAddress({ useFullAddress: true }),
-                    bairro: faker.location.state(),
-                    cidade: faker.location.city(),
-                    cep: faker.location.zipCode(),
-                    cliente_id: 1
+                for (let i = 1; i <= 10; i++) {
+                    let endereco = {
+                        logradouro: faker.location.streetAddress({ useFullAddress: true }),
+                        bairro: faker.location.state(),
+                        cidade: faker.location.city(),
+                        cep: faker.location.zipCode(),
+                        cliente_id: faker.number.int({ min: 1, max: 10 })
                 };
-                await enderecoRepository.add(endereco);     
-
-        } catch (error) {
+                await enderecoRepository.add(endereco);   
+            }
+     } catch (error) {
             console.error("Erro na inicialização do Endereço", error);
         }
 
         try {
-
             let estacionamentoRepository = new EstacionamentoRepository();
-
+             for (let i = 1; i <= 10; i++) {
                 let estacionamento = {
                 name: faker.company.name(),
                 cnpj: faker.number.int(),
@@ -84,12 +83,73 @@ class App {
                 bairro: faker.location.state(),
                 cidade: faker.location.city(),
                 cep: faker.location.zipCode(),
-                admin_id: 1
+                admin_id: faker.number.int({ min: 1, max: 10 })
                 };
                 await estacionamentoRepository.add(estacionamento);
+            }
 
         } catch (error) {
-            console.error("Erro na inicialização do Cliente", error);
+            console.error("Erro na inicialização do Estacionamento", error);
+        }
+
+        try {
+            let tipoPagamentoRepository = new TipoPagamentoRepository();
+
+                let tipoPagamento = {
+                    forma_pagamento: 'DINHEIRO',
+                    pagamento_id: faker.number.int({ min: 1, max: 10 })
+                };
+                await tipoPagamentoRepository.add(tipoPagamento);
+  
+
+        } catch (error) {
+            console.error("Erro na inicialização do TipoPagamento", error);
+        }
+
+        try {
+            let pagamentoRepository = new PagamentoRepository();
+             for (let i = 1; i <= 10; i++) {
+                let pagamento = {
+                valor: faker.number.float({ min: 1, max: 70, precision: 0.01 }),
+                tipoPagamento_id: 1,
+                };
+                await pagamentoRepository.add(pagamento);
+            }
+
+        } catch (error) {
+            console.error("Erro na inicialização do Pagamento", error);
+        }
+
+        try {
+            let vagaRepository = new VagaRepository();
+             for (let i = 1; i <= 10; i++) {
+                let vaga = {
+                tipoVaga: faker.datatype.boolean({ probability: 0.5 }) ? 'MOTO' : 'CARRO',
+                cobertura: faker.datatype.boolean({ probability: 0.5 }),
+                estacionamento_id: faker.number.int({ min: 1, max: 10 })
+                };
+                await vagaRepository.add(vaga);
+            }
+
+        } catch (error) {
+            console.error("Erro na inicialização da Vaga", error);
+        }
+
+        try {
+            let registroRepository = new VagaRepository();
+             for (let i = 1; i <= 10; i++) {
+                let registro = {
+                entrada: faker.date.recent,
+                saida: faker.date.recent,
+                vaga_id: faker.number.int({ min: 1, max: 10 }),
+                cliente_id: faker.number.int({ min: 1, max: 10 }),
+                pagamento_id: faker.number.int({ min: 1, max: 10 }),
+            };
+                await registroRepository.add(registro);
+            }
+
+        } catch (error) {
+            console.error("Erro na inicialização do Registro", error);
         }
 
     }
