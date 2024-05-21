@@ -56,7 +56,7 @@ class VagaRepository extends VagaRepositoryInterface {
 
   async getAll() {
     try {
-      const rows = await Registro.findAll();
+      const rows = await Vaga.findAll();
       return rows;
     } catch (err) {
       console.error(err);

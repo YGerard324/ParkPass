@@ -3,7 +3,7 @@ const app = express();
 const port = 3000;
 app.use(express.json());
 
-// Admin routes
+// Admin routes <-- OK
 const AdminRepository = require("./src/repository/AdminRepository");
 const AdminApplication = require("./src/application/AdminApplication");
 const AdminInterface = require("./src/facade/AdminInterface");
@@ -72,7 +72,7 @@ app.post("/admin", async (req, res) => {
 });
 // Admin routes
 
-// Cliente routes
+// Cliente routes <-- OK
 
 const ClienteRepository = require("./src/repository/ClienteRepository");
 const ClienteApplication = require("./src/application/ClienteApplication");
@@ -133,7 +133,7 @@ app.post("/cliente", async (req, res) => {
 });
 //Cliente routes
 
-// Endereco routes
+// Endereco routes <-- OK
 const EnderecoRepository = require("./src/repository/EnderecoRepository");
 const EnderecoApplication = require("./src/application/EnderecoApplication");
 const EnderecoInterface = require("./src/facade/EnderecoInterface");
@@ -142,7 +142,7 @@ const enderecoRepository = new EnderecoRepository();
 const enderecoApplication = new EnderecoApplication(enderecoRepository);
 const enderecoInterface = new EnderecoInterface(enderecoApplication);
 
-app.get("/endereco", async (req, res) => { //OK
+app.get("/endereco", async (req, res) => { 
   try {
     const endereco = await enderecoInterface.getAll();
     res.status(200).send(endereco);
@@ -151,7 +151,7 @@ app.get("/endereco", async (req, res) => { //OK
   }
 });
 
-app.get("/endereco/:id", async (req, res) => { //OK
+app.get("/endereco/:id", async (req, res) => { 
   const { id } = req.params;
   try {
     const row = await enderecoInterface.getById(id);
@@ -164,7 +164,7 @@ app.get("/endereco/:id", async (req, res) => { //OK
   }
 });
 
-app.put("/endereco/:id", async (req, res) => { //OK
+app.put("/endereco/:id", async (req, res) => { 
   try {
     const row = await enderecoInterface.update(req);
     res.status(200).json({ error: "endereco atualizado com sucesso!" });
@@ -174,7 +174,7 @@ app.put("/endereco/:id", async (req, res) => { //OK
   }
 });
 
-app.delete("/endereco", async (req, res) => { //OK
+app.delete("/endereco", async (req, res) => { 
   try {
     await enderecoInterface.delete(req.body);
     res.status(200).json({ error: "endereco atualizado com sucesso!" });
@@ -183,7 +183,7 @@ app.delete("/endereco", async (req, res) => { //OK
   }
 });
 
-app.post("/endereco", async (req, res) => { // OK
+app.post("/endereco", async (req, res) => { 
   try {
     await enderecoInterface.add(req.body);
     res.status(200).json({ error: "endereco atualizado com sucesso!" });
@@ -193,7 +193,7 @@ app.post("/endereco", async (req, res) => { // OK
 });
 // Endereco routes
 
-//Estacionamento routes
+//Estacionamento routes <-- OK
 
 const EstacionamentoRepository = require("./src/repository/EstacionamentoRepository");
 const EstacionamentoApplication = require("./src/application/EstacionamentoApplication");
@@ -203,7 +203,7 @@ const estacionamentoRepository = new EstacionamentoRepository();
 const estacionamentoApplication = new EstacionamentoApplication(estacionamentoRepository);
 const estacionamentoInterface = new EstacionamentoInterface(estacionamentoApplication);
 
-app.get("/estacionamento", async (req, res) => { //OK
+app.get("/estacionamento", async (req, res) => { 
   try {
     const estacionamento = await estacionamentoInterface.getAll();
     res.status(200).send(estacionamento);
@@ -212,7 +212,7 @@ app.get("/estacionamento", async (req, res) => { //OK
   }
 });
 
-app.get("/estacionamento/:id", async (req, res) => { // OK
+app.get("/estacionamento/:id", async (req, res) => { 
   const { id } = req.params;
   try {
     const row = await estacionamentoInterface.getById(id);
@@ -225,7 +225,7 @@ app.get("/estacionamento/:id", async (req, res) => { // OK
   }
 });
 
-app.put("/estacionamento/:id", async (req, res) => { //OK
+app.put("/estacionamento/:id", async (req, res) => { 
   try {
     const row = await estacionamentoInterface.update(req);
     res.status(200).json({ error: "Estacionamento atualizado com sucesso!" });
@@ -235,7 +235,7 @@ app.put("/estacionamento/:id", async (req, res) => { //OK
   }
 });
 
-app.delete("/estacionamento", async (req, res) => { // OK
+app.delete("/estacionamento", async (req, res) => { 
   try {
     await estacionamentoInterface.delete(req.body);
     res.status(200).json({ error: "Estacionamento atualizado com sucesso!" });
@@ -244,7 +244,7 @@ app.delete("/estacionamento", async (req, res) => { // OK
   }
 });
 
-app.post("/estacionamento", async (req, res) => { // OK
+app.post("/estacionamento", async (req, res) => { 
   try {
     await estacionamentoInterface.add(req.body);
     res.status(200).json({ error: "Estacionamento atualizado com sucesso!" });
@@ -255,7 +255,7 @@ app.post("/estacionamento", async (req, res) => { // OK
 
 //Estacionamento routes
 
-// Pagamento routes
+// Pagamento routes <-- OK
 const PagamentoRepository = require("./src/repository/PagamentoRepository");
 const PagamentoApplication = require("./src/application/PagamentoApplication");
 const PagamentoInterface = require("./src/facade/PagamentoInterface");
@@ -264,7 +264,7 @@ const pagamentoRepository = new PagamentoRepository();
 const pagamentoApplication = new PagamentoApplication(pagamentoRepository);
 const pagamentoInterface = new PagamentoInterface(pagamentoApplication);
 
-app.get("/pagamento", async (req, res) => { //OK
+app.get("/pagamento", async (req, res) => { 
   try {
     const pagamento = await pagamentoInterface.getAll();
     res.status(200).send(pagamento);
@@ -273,7 +273,7 @@ app.get("/pagamento", async (req, res) => { //OK
   }
 });
 
-app.get("/pagamento/:id", async (req, res) => { //OK
+app.get("/pagamento/:id", async (req, res) => { 
   const { id } = req.params;
   try {
     const row = await pagamentoInterface.getById(id);
@@ -286,7 +286,7 @@ app.get("/pagamento/:id", async (req, res) => { //OK
   }
 });
 
-app.put("/pagamento/:id", async (req, res) => { // OK
+app.put("/pagamento/:id", async (req, res) => { 
   try {
     const row = await pagamentoInterface.update(req);
     res.status(200).json({ error: "pagamento atualizado com sucesso!" });
@@ -296,7 +296,7 @@ app.put("/pagamento/:id", async (req, res) => { // OK
   }
 });
 
-app.delete("/pagamento", async (req, res) => { // <-- TABELA RELACIONADA, PRECISA CASCADE
+app.delete("/pagamento", async (req, res) => { 
   try {
     await pagamentoInterface.delete(req.body);
     res.status(200).json({ error: "pagamento atualizado com sucesso!" });
@@ -305,7 +305,7 @@ app.delete("/pagamento", async (req, res) => { // <-- TABELA RELACIONADA, PRECIS
   }
 });
 
-app.post("/pagamento", async (req, res) => { // <-- <-- Ok,PRECISA PASSAR OS PARAMETROS RELACIONADOS
+app.post("/pagamento", async (req, res) => { 
   try {
     await pagamentoInterface.add(req.body);
     res.status(200).json({ error: "pagamento atualizado com sucesso!" });
@@ -315,7 +315,7 @@ app.post("/pagamento", async (req, res) => { // <-- <-- Ok,PRECISA PASSAR OS PAR
 });
 // Pagamento routes
 
-// Registro routes
+// Registro routes <-- OK
 
 const RegistroRepository = require("./src/repository/RegistroRepository");
 const RegistroApplication = require("./src/application/RegistroApplication");
@@ -326,7 +326,7 @@ const registroApplication = new RegistroApplication(registroRepository);
 const registroInterface = new RegistroInterface(registroApplication);
 
 
-app.get("/registro", async (req, res) => { // OK
+app.get("/registro", async (req, res) => {
   try {
     const registro = await registroInterface.getAll();
     res.status(200).send(registro);
@@ -335,7 +335,7 @@ app.get("/registro", async (req, res) => { // OK
   }
 });
 
-app.get("/registro/:id", async (req, res) => { // OK
+app.get("/registro/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const row = await registroInterface.getById(id);
@@ -348,7 +348,7 @@ app.get("/registro/:id", async (req, res) => { // OK
   }
 });
 
-app.put("/registro/:id", async (req, res) => { //OK
+app.put("/registro/:id", async (req, res) => {
   try {
     const row = await registroInterface.update(req);
     res.status(200).json({ error: "Registro atualizado com sucesso!" });
@@ -358,7 +358,7 @@ app.put("/registro/:id", async (req, res) => { //OK
   }
 });
 
-app.delete("/registro", async (req, res) => { // TABELA RELACIONADA, PRECISA CASCADE
+app.delete("/registro", async (req, res) => { 
   try {
     await registroInterface.delete(req.body);
     res.status(200).json({ error: "Registro atualizado com sucesso!" });
@@ -367,7 +367,7 @@ app.delete("/registro", async (req, res) => { // TABELA RELACIONADA, PRECISA CAS
   }
 });
 
-app.post("/registro", async (req, res) => { // <-- Ok,PRECISA PASSAR OS PARAMETROS RELACIONADOS
+app.post("/registro", async (req, res) => { 
   try {
     await registroInterface.add(req.body);
     res.status(200).json({ error: "Registro atualizado com sucesso!" });
@@ -379,7 +379,7 @@ app.post("/registro", async (req, res) => { // <-- Ok,PRECISA PASSAR OS PARAMETR
 // Registro routes
 
 
-// TipoPagamento routes
+// TipoPagamento routes <-- OK
 const TipoPagamentoRepository = require("./src/repository/TipoPagamentoRepository");
 const TipoPagamentoApplication = require("./src/application/TipoPagamentoApplication");
 const TipoPagamentoInterface = require("./src/facade/TipoPagamentoInterface");
@@ -388,7 +388,7 @@ const tipoPagamentoRepository = new TipoPagamentoRepository();
 const tipoPagamentoApplication = new TipoPagamentoApplication(tipoPagamentoRepository);
 const tipoPagamentoInterface = new TipoPagamentoInterface(tipoPagamentoApplication);
 
-app.get("/tipoPagamento", async (req, res) => { // OK
+app.get("/tipoPagamento", async (req, res) => { 
   try {
     const tipoPagamento = await tipoPagamentoInterface.getAll();
     res.status(200).send(tipoPagamento);
@@ -397,7 +397,7 @@ app.get("/tipoPagamento", async (req, res) => { // OK
   }
 });
 
-app.get("/tipoPagamento/:id", async (req, res) => { // OK
+app.get("/tipoPagamento/:id", async (req, res) => { 
   const { id } = req.params;
   try {
     const row = await tipoPagamentoInterface.getById(id);
@@ -410,7 +410,7 @@ app.get("/tipoPagamento/:id", async (req, res) => { // OK
   }
 });
 
-app.put("/tipoPagamento/:id", async (req, res) => { // OK
+app.put("/tipoPagamento/:id", async (req, res) => { 
   try {
     const row = await tipoPagamentoInterface.update(req);
     res.status(200).json({ error: "tipoPagamento atualizado com sucesso!" });
@@ -420,7 +420,7 @@ app.put("/tipoPagamento/:id", async (req, res) => { // OK
   }
 });
 
-app.delete("/tipoPagamento", async (req, res) => { // OK
+app.delete("/tipoPagamento", async (req, res) => { 
   try {
     await tipoPagamentoInterface.delete(req.body);
     res.status(200).json({ error: "tipoPagamento atualizado com sucesso!" });
@@ -429,7 +429,7 @@ app.delete("/tipoPagamento", async (req, res) => { // OK
   }
 });
 
-app.post("/tipoPagamento", async (req, res) => { // OK
+app.post("/tipoPagamento", async (req, res) => { 
   try {
     await tipoPagamentoInterface.add(req.body);
     res.status(200).json({ error: "tipoPagamento atualizado com sucesso!" });
@@ -439,7 +439,7 @@ app.post("/tipoPagamento", async (req, res) => { // OK
 });
 // TipoPagamento routes
 
-// vaga routes
+// vaga routes <-- OK
 const VagaRepository = require("./src/repository/VagaRepository");
 const VagaApplication = require("./src/application/VagaApplication");
 const VagaInterface = require("./src/facade/VagaInterface");
@@ -448,7 +448,7 @@ const vagaRepository = new VagaRepository();
 const vagaApplication = new VagaApplication(vagaRepository);
 const vagaInterface = new VagaInterface(vagaApplication);
 
-app.get("/vaga", async (req, res) => { // OK
+app.get("/vaga", async (req, res) => {
   try {
     const vaga = await vagaInterface.getAll();
     res.status(200).send(vaga);
@@ -458,7 +458,7 @@ app.get("/vaga", async (req, res) => { // OK
   }
 });
 
-app.get("/vaga/:id", async (req, res) => { // OK
+app.get("/vaga/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const row = await vagaInterface.getById(id);
@@ -471,7 +471,7 @@ app.get("/vaga/:id", async (req, res) => { // OK
   }
 });
 
-app.put("/vaga/:id", async (req, res) => { // OK
+app.put("/vaga/:id", async (req, res) => { 
   try {
     const row = await vagaInterface.update(req);
     res.status(200).json({ error: "tipoPagamento atualizado com sucesso!" });
@@ -481,16 +481,16 @@ app.put("/vaga/:id", async (req, res) => { // OK
   }
 });
 
-app.delete("/vaga", async (req, res) => { // OK
+app.delete("/vaga", async (req, res) => { 
   try {
-    await vaga.delete(req.body);
+    await vagaInterface.delete(req.body);
     res.status(200).json({ error: "vaga atualizada com sucesso!" });
   } catch (error) {
     res.status(500).json({ error: "Erro ao deletar vaga" });
   }
 });
 
-app.post("/vaga", async (req, res) => { // OK
+app.post("/vaga", async (req, res) => { 
   try {
     await vagaInterface.add(req.body);
     res.status(200).json({ error: "vaga atualizada com sucesso!" });
