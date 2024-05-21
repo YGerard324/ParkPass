@@ -86,13 +86,13 @@ sequelize
     as: "cliente", // alias para a relação
   });
 
-  Pagamento.hasMany(TipoPagamento, {
-    foreignKey: "pagamento_id",
-    as: "tiposPagamento", // alias para a relacionamento
+  TipoPagamento.hasMany(Pagamento, {
+    foreignKey: "tipoPagamento_id",
+    as: "pagamentos", // alias para o relacionamento
   });
-  TipoPagamento.belongsTo(Pagamento, {
-    foreignKey: "pagamento_id",
-    as: "pagamento", // alias para a relacionamento
+  Pagamento.belongsTo(TipoPagamento, {
+    foreignKey: "tipoPagamento_id",
+    as: "tipoPagamento", // alias para o relacionamento
   });
 
   Cliente.hasMany(Endereco, {

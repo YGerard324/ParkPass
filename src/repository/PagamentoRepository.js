@@ -13,6 +13,7 @@ class PagamentoRepository extends PagamentoRepositoryInterface {
       const row = await Pagamento.create(req);
       return row;
     } catch (error) {
+      console.log(error)
       throw new Error("Erro ao criar um Pagamento");
     }
   }

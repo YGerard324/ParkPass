@@ -114,15 +114,6 @@ app.put("/cliente/:id", async (req, res) => {
   }
 });
 
-app.put("/cliente", async (req, res) => {
-  try {
-    await clienteInterface.update(req.body);
-    res.status(200).json({ error: "Cliente atualizado com sucesso!" });
-  } catch (error) {
-    res.status(500).json({ error: "Erro ao obter cliente" });
-  }
-});
-
 app.delete("/cliente", async (req, res) => {
   try {
     await clienteInterface.delete(req.body);
@@ -180,15 +171,6 @@ app.put("/endereco/:id", async (req, res) => { //OK
   } catch (error) {
     console.error("Erro ao obter peça por ID:", error);
     res.status(500).json({ error: "Erro interno ao buscar peça" });
-  }
-});
-
-app.put("/endereco", async (req, res) => { // <-- VERIFICAR
-  try {
-    await enderecoInterface.update(req.body);
-    res.status(200).json({ error: "endereco atualizado com sucesso!" });
-  } catch (error) {
-    res.status(500).json({ error: "Erro ao obter endereco" });
   }
 });
 
@@ -253,15 +235,6 @@ app.put("/estacionamento/:id", async (req, res) => { //OK
   }
 });
 
-app.put("/estacionamento", async (req, res) => { // <-- VERIFICAR
-  try {
-    await estacionamentoInterface.update(req.body);
-    res.status(200).json({ error: "Estacionamento atualizado com sucesso!" });
-  } catch (error) {
-    res.status(500).json({ error: "Erro ao obter estacionamento" });
-  }
-});
-
 app.delete("/estacionamento", async (req, res) => { // OK
   try {
     await estacionamentoInterface.delete(req.body);
@@ -323,16 +296,7 @@ app.put("/pagamento/:id", async (req, res) => { // OK
   }
 });
 
-app.put("/pagamento", async (req, res) => { // <-- VERIFICAR
-  try {
-    await pagamentoInterface.update(req.body);
-    res.status(200).json({ error: "pagamento atualizado com sucesso!" });
-  } catch (error) {
-    res.status(500).json({ error: "Erro ao obter pagamento" });
-  }
-});
-
-app.delete("/pagamento", async (req, res) => { // <-- ERRO: TABELA RELACIONADA, PRECISA CASCADE
+app.delete("/pagamento", async (req, res) => { // <-- TABELA RELACIONADA, PRECISA CASCADE
   try {
     await pagamentoInterface.delete(req.body);
     res.status(200).json({ error: "pagamento atualizado com sucesso!" });
@@ -341,7 +305,7 @@ app.delete("/pagamento", async (req, res) => { // <-- ERRO: TABELA RELACIONADA, 
   }
 });
 
-app.post("/pagamento", async (req, res) => { // <-- ERRO: TABELA RELACIONADA, PRECISA DE NOVOS REGISTROS
+app.post("/pagamento", async (req, res) => { // <-- <-- Ok,PRECISA PASSAR OS PARAMETROS RELACIONADOS
   try {
     await pagamentoInterface.add(req.body);
     res.status(200).json({ error: "pagamento atualizado com sucesso!" });
@@ -367,7 +331,7 @@ app.get("/registro", async (req, res) => { // OK
     const registro = await registroInterface.getAll();
     res.status(200).send(registro);
   } catch (error) {
-    res.status(500).json({ error: "Erro ao obter estacionamento" });
+    res.status(500).json({ error: "Erro ao obter registro" });
   }
 });
 
@@ -394,16 +358,7 @@ app.put("/registro/:id", async (req, res) => { //OK
   }
 });
 
-app.put("/registro", async (req, res) => { // <-- VERIFICAR
-  try {
-    await registroInterface.update(req.body);
-    res.status(200).json({ error: "Registro atualizado com sucesso!" });
-  } catch (error) {
-    res.status(500).json({ error: "Erro ao obter registro" });
-  }
-});
-
-app.delete("/registro", async (req, res) => { // ERRO: TABELA RELACIONADA, PRECISA CASCADE
+app.delete("/registro", async (req, res) => { // TABELA RELACIONADA, PRECISA CASCADE
   try {
     await registroInterface.delete(req.body);
     res.status(200).json({ error: "Registro atualizado com sucesso!" });
@@ -412,7 +367,7 @@ app.delete("/registro", async (req, res) => { // ERRO: TABELA RELACIONADA, PRECI
   }
 });
 
-app.post("/registro", async (req, res) => { // <-- ERRO: TABELA RELACIONADA, PRECISA DE OUTROS REGISTROS
+app.post("/registro", async (req, res) => { // <-- Ok,PRECISA PASSAR OS PARAMETROS RELACIONADOS
   try {
     await registroInterface.add(req.body);
     res.status(200).json({ error: "Registro atualizado com sucesso!" });
@@ -465,15 +420,6 @@ app.put("/tipoPagamento/:id", async (req, res) => { // OK
   }
 });
 
-app.put("/tipoPagamento", async (req, res) => { // <-- VERIFICAR
-  try {
-    await tipoPagamentoInterface.update(req.body);
-    res.status(200).json({ error: "tipoPagamento atualizado com sucesso!" });
-  } catch (error) {
-    res.status(500).json({ error: "Erro ao obter tipoPagamento" });
-  }
-});
-
 app.delete("/tipoPagamento", async (req, res) => { // OK
   try {
     await tipoPagamentoInterface.delete(req.body);
@@ -491,9 +437,9 @@ app.post("/tipoPagamento", async (req, res) => { // OK
     res.status(500).json({ error: "Erro ao obter tipoPagamento" });
   }
 });
-// Pagamento routes
+// TipoPagamento routes
 
-//Vaga routes
+// vaga routes
 const VagaRepository = require("./src/repository/VagaRepository");
 const VagaApplication = require("./src/application/VagaApplication");
 const VagaInterface = require("./src/facade/VagaInterface");
@@ -502,65 +448,57 @@ const vagaRepository = new VagaRepository();
 const vagaApplication = new VagaApplication(vagaRepository);
 const vagaInterface = new VagaInterface(vagaApplication);
 
-app.get("/vaga", async (req, res) => {
+app.get("/vaga", async (req, res) => { // OK
   try {
     const vaga = await vagaInterface.getAll();
     res.status(200).send(vaga);
   } catch (error) {
+    console.log(error)
     res.status(500).json({ error: "Erro ao obter vaga" });
   }
 });
 
-app.get("/vaga/:id", async (req, res) => {
+app.get("/vaga/:id", async (req, res) => { // OK
   const { id } = req.params;
   try {
     const row = await vagaInterface.getById(id);
     if (!row) {
-      return res.status(404).json({ error: "Vaga não encontrado" });
+      return res.status(404).json({ error: "vaga não encontrada" });
     }
     res.status(200).json(row);
   } catch (error) {
-    res.status(500).json({ error: "Erro interno ao buscar o vaga" });
+    res.status(500).json({ error: "Erro interno ao buscar a vaga" });
   }
 });
 
-app.put("/vaga/:id", async (req, res) => {
+app.put("/vaga/:id", async (req, res) => { // OK
   try {
     const row = await vagaInterface.update(req);
-    res.status(200).json({ error: "Vaga atualizado com sucesso!" });
+    res.status(200).json({ error: "tipoPagamento atualizado com sucesso!" });
   } catch (error) {
-    console.error("Erro ao obter vaga por ID:", error);
-    res.status(500).json({ error: "Erro interno ao buscar vaga" });
+    console.error("Erro ao obter peça por ID:", error);
+    res.status(500).json({ error: "Erro interno ao atualizar vaga" });
   }
 });
 
-app.put("/vaga", async (req, res) => {
+app.delete("/vaga", async (req, res) => { // OK
   try {
-    await vagaInterface.update(req.body);
-    res.status(200).json({ error: "Vaga atualizado com sucesso!" });
+    await vaga.delete(req.body);
+    res.status(200).json({ error: "vaga atualizada com sucesso!" });
   } catch (error) {
-    res.status(500).json({ error: "Erro ao obter vaga" });
+    res.status(500).json({ error: "Erro ao deletar vaga" });
   }
 });
 
-app.delete("/vaga", async (req, res) => {
-  try {
-    await vagaInterface.delete(req.body);
-    res.status(200).json({ error: "Vaga atualizado com sucesso!" });
-  } catch (error) {
-    res.status(500).json({ error: "Erro ao obter vaga" });
-  }
-});
-
-app.post("/vaga", async (req, res) => {
+app.post("/vaga", async (req, res) => { // OK
   try {
     await vagaInterface.add(req.body);
-    res.status(200).json({ error: "Vaga atualizado com sucesso!" });
+    res.status(200).json({ error: "vaga atualizada com sucesso!" });
   } catch (error) {
-    res.status(500).json({ error: "Erro ao obter vaga" });
+    res.status(500).json({ error: "Erro ao atualizar vaga" });
   }
 });
-//Vaga routes
+// vaga routes
 
 app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);

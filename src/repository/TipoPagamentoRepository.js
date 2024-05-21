@@ -11,6 +11,7 @@ class TipoPagamentoRepository extends TipoPagamentoRepositoryInterface {
       const row = await TipoPagamento.create(req);
       return row;
     } catch (error) {
+      console.log(error)
       throw new Error("Erro ao criar um TipoPagamento");
     }
   }

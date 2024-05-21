@@ -87,37 +87,9 @@ class App {
                 };
                 await estacionamentoRepository.add(estacionamento);
             }
-
+            
         } catch (error) {
             console.error("Erro na inicialização do Estacionamento", error);
-        }
-
-        try {
-            let tipoPagamentoRepository = new TipoPagamentoRepository();
-
-                let tipoPagamento = {
-                    forma_pagamento: 'DINHEIRO',
-                    pagamento_id: faker.number.int({ min: 1, max: 10 })
-                };
-                await tipoPagamentoRepository.add(tipoPagamento);
-  
-
-        } catch (error) {
-            console.error("Erro na inicialização do TipoPagamento", error);
-        }
-
-        try {
-            let pagamentoRepository = new PagamentoRepository();
-             for (let i = 1; i <= 10; i++) {
-                let pagamento = {
-                valor: faker.number.float({ min: 1, max: 70, precision: 0.01 }),
-                tipoPagamento_id: 1,
-                };
-                await pagamentoRepository.add(pagamento);
-            }
-
-        } catch (error) {
-            console.error("Erro na inicialização do Pagamento", error);
         }
 
         try {
@@ -136,11 +108,43 @@ class App {
         }
 
         try {
-            let registroRepository = new VagaRepository();
+            let tipoPagamentoRepository = new TipoPagamentoRepository();
+
+            const formasPagamento = ['DINHEIRO', 'CARTAO DE CREDITO', 'BOLETO', 'PIX', 'CARTAO DE DEBITO', 'OUTROS'];
+            for (let forma of formasPagamento) {
+                let tipoPagamento = {
+                    forma_pagamento: forma,
+                };
+                await tipoPagamentoRepository.add(tipoPagamento);
+            }
+  
+
+        } catch (error) {
+            console.error("Erro na inicialização do TipoPagamento", error);
+        }
+
+        try {
+            let pagamentoRepository = new PagamentoRepository();
+             for (let i = 1; i <= 10; i++) {
+                let pagamento = {
+                valor: faker.number.float({ min: 1, max: 10, multipleOf: 0.01 }),
+                tipoPagamento_id: 1,
+                registro_id: i
+                };
+                await pagamentoRepository.add(pagamento);
+            }
+
+        } catch (error) {
+            console.error("Erro na inicialização do Pagamento", error);
+        }
+
+
+        try {
+            let registroRepository = new RegistroRepository();
              for (let i = 1; i <= 10; i++) {
                 let registro = {
-                entrada: faker.date.recent,
-                saida: faker.date.recent,
+                entrada: faker.date.between({ from: '2024-05-15T00:00:00.000Z', to: '2024-05-15T00:23:59.000Z' }),
+                saida: faker.date.between({ from: '2024-05-15T00:00:00.000Z', to: '2024-05-15T00:23:59.000Z' }),
                 vaga_id: faker.number.int({ min: 1, max: 10 }),
                 cliente_id: faker.number.int({ min: 1, max: 10 }),
                 pagamento_id: faker.number.int({ min: 1, max: 10 }),
