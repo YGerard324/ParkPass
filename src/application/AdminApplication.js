@@ -3,23 +3,23 @@ class AdminApplication {
     this.AdminRepository = AdminRepository;
   }
 
-  async add(admin) {
-    return await this.AdminRepository.add(admin);
+  async add(data) {
+    return await this.AdminRepository.add(data);
   }
-  async getById(code) {
-    return await this.AdminRepository.getById(code);
+  async getById(id) {
+    return await this.AdminRepository.getById(id);
   }
 
   async getAll() {
     return await this.AdminRepository.getAll();
   }
 
-  async update(admin) {
-    return await this.AdminRepository.update(admin);
+  async update(data) {
+    return await this.AdminRepository.update(data);
   }
 
-  async delete(code) {
-    return await this.AdminRepository.delete(code);
+  async delete(id) {
+    return await this.AdminRepository.delete(id);
   }
 }
 
