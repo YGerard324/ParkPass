@@ -11,9 +11,10 @@ class RegisterRepository extends RegisterRepositoryInterface {
   }
 
   async getById(id) {
-    await Register.findOne({
+    const register =await Register.findOne({
       where: { id },
     });
+    return register;
   }
 
   async getAll() {
@@ -31,8 +32,8 @@ class RegisterRepository extends RegisterRepositoryInterface {
     });
   }
 
-  async delete(req) {
-    const { id } = req;
+  async delete(id) {
+    //const { id } = req;
     await Register.destroy({
       where: { id },
       returning: true,

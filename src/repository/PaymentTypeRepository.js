@@ -11,9 +11,10 @@ class PaymentTypeRepository extends PaymentTypeRepositoryInterface {
   }
 
   async getById(id) {
-    await PaymentType.findOne({
+    const paymentType = await PaymentType.findOne({
       where: { id },
     });
+    return paymentType;
   }
 
   async getAll() {
@@ -31,8 +32,8 @@ class PaymentTypeRepository extends PaymentTypeRepositoryInterface {
     });
   }
 
-  async delete(req) {
-    const { id } = req;
+  async delete(id) {
+    //const { id } = req;
     await PaymentType.destroy({
       where: { id },
       returning: true,

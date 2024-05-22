@@ -11,9 +11,10 @@ class ClientRepository extends ClientRepositoryInterface {
   }
 
   async getById(id) {
-    await Client.findOne({
+    const client = await Client.findOne({
       where: { id },
     });
+    return client;
   }
 
   async getAll() {
@@ -31,8 +32,8 @@ class ClientRepository extends ClientRepositoryInterface {
     });
   }
 
-  async delete(req) {
-    const { id } = req;
+  async delete(id) {
+    //const { id } = req;
     await Client.destroy({
       where: { id },
       returning: true,

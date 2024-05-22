@@ -11,9 +11,10 @@ class AdminRepository extends AdminRepositoryInterface {
   }
 
   async getById(id) {
-    await Admin.findOne({
+    const admin = await Admin.findOne({
       where: { id },
     });
+    return admin;
   }
 
   async getAll() {
@@ -31,8 +32,8 @@ class AdminRepository extends AdminRepositoryInterface {
     });
   }
 
-  async delete(req) {
-    const { id } = req;
+  async delete(id) {
+    //const { id } = req;
     await Admin.destroy({
       where: { id },
       returning: true,

@@ -10,9 +10,10 @@ class AddressRepository extends AddressRepositoryInterface {
   }
 
   async getById(id) {
-    await Address.findOne({
+    const address = await Address.findOne({
       where: { id },
     });
+    return address;
   }
 
   async getAll() {
@@ -30,8 +31,8 @@ class AddressRepository extends AddressRepositoryInterface {
     });
   }
 
-  async delete(req) {
-    const { id } = req;
+  async delete(id) {
+    //const { id } = req;
     await Address.destroy({
       where: { id },
       returning: true,

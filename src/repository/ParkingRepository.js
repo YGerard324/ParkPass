@@ -10,9 +10,10 @@ class ParkingRepository extends ParkingRepositoryInterface {
   }
 
   async getById(id) {
-    await Parking.findOne({
+    const parking = await Parking.findOne({
       where: { id },
     });
+    return parking;
   }
 
   async getAll() {
@@ -30,8 +31,8 @@ class ParkingRepository extends ParkingRepositoryInterface {
     });
   }
 
-  async delete(req) {
-    const { id } = req;
+  async delete(id) {
+    //const { id } = req;
     await Parking.destroy({
       where: { id },
       returning: true,

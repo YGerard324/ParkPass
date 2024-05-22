@@ -128,7 +128,7 @@ class App {
                 payment_type_id: 1,
                 register_id: i
                 };
-                await PaymentRepository.add(payment);
+                await paymentRepository.add(payment);
             }
 
         } catch (error) {

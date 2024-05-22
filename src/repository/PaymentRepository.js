@@ -11,9 +11,10 @@ class PaymentRepository extends PaymentRepositoryInterface {
   }
 
   async getById(id) {
-    await Payment.findOne({
+    const payment = await Payment.findOne({
       where: { id },
     });
+    return payment;
   }
 
   async getAll() {
@@ -31,8 +32,8 @@ class PaymentRepository extends PaymentRepositoryInterface {
     });
   }
 
-  async delete(req) {
-    const { id } = req;
+  async delete(id) {
+    //const { id } = req;
     await Payment.destroy({
       where: { id },
       returning: true,

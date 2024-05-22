@@ -11,9 +11,10 @@ class ParkingSpaceRepository extends ParkingSpaceRepositoryInterface {
   }
 
   async getById(id) {
-    await ParkingSpace.findOne({
+    const parkingSpace = await ParkingSpace.findOne({
       where: { id },
     });
+    return parkingSpace;
   }
 
   async getAll() {
@@ -31,8 +32,8 @@ class ParkingSpaceRepository extends ParkingSpaceRepositoryInterface {
     });
   }
 
-  async delete(req) {
-    const { id } = req;
+  async delete(id) {
+    //const { id } = req;
     await ParkingSpace.destroy({
       where: { id },
       returning: true,
