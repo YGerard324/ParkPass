@@ -14,6 +14,10 @@ class AdminFacade {
     return await this.AdminApplication.getAll();
   }
 
+  async login(email, password) {
+    return await this.AdminApplication.authenticate(email, password); 
+  }
+
   async update(data) {
     return await this.AdminApplication.update(data);
   }
