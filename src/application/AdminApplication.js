@@ -7,6 +7,7 @@ class AdminApplication {
     return await this.AdminRepository.add(data);
   }
   async getById(id) {
+    
     return await this.AdminRepository.getById(id);
   }
 
