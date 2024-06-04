@@ -10,6 +10,30 @@ class ClientApplication {
     return await this.ClientRepository.getById(id);
   }
 
+  async authenticate(email, password) {
+    const clients = await this.clientRepository.getAll();
+    const client = clients.find((client) => client.email === email);
+    console.log("client : ", client.id, client.name, client.email, client.password);
+    if (!client) {
+      throw new Error("O email informado não foi cadastrado");
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, client.password);
+    if (!isPasswordValid) {
+      throw new Error("Usuário ou senha errado!");
+    }
+
+    const token = jwt.sign(
+      {
+        email: client.email,
+      },
+      "key",
+      { expiresIn: "1h" }
+    );
+
+    return token;
+  }
+
   async getAll() {
     return await this.ClientRepository.getAll();
   }

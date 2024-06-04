@@ -1,26 +1,27 @@
 class PaymentApplication {
-  constructor(PaymentRepository) {
-    this.PaymentRepository = PaymentRepository;
+  constructor(PaymentFactory) {
+    this.PaymentFactory = PaymentFactory;
   }
 
-  async add(data) {
-    return await this.PaymentRepository.add(data);
+  async getPaid(data) {
+    return await this.PaymentFactory.createPayment(data);
   }
   async getById(code) {
-    return await this.PaymentRepository.getById(code);
+    return await this.PaymentFactory.getById(code);
   }
 
   async getAll() {
-    return await this.PaymentRepository.getAll();
+    return await this.PaymentFactory.getAll();
   }
 
   async update(data) {
-    return await this.PaymentRepository.update(data);
+    return await this.PaymentFactory.update(data);
   }
 
   async delete(code) {
-    return await this.PaymentRepository.delete(code);
+    return await this.PaymentFactory.delete(code);
   }
+
 }
 
 module.exports = PaymentApplication;
