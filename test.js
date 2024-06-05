@@ -27,8 +27,10 @@ class App {
                 document: faker.number.int(),
                 document_type: tipo,
                 phone: faker.phone.number(),
-                acess_level: faker.number.int({ min: 0, max: 1 })
+                access_level: faker.number.int({ min: 0, max: 1 })
                 };
+
+
                 await userRepository.add(user);
             }
 

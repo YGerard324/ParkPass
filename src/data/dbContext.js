@@ -12,7 +12,6 @@ const sequelize = new Sequelize(
   }
 );
 
-const Admin = require("../data/AdminModel")(sequelize, DataTypes);
 const User = require("../data/UserModel")(sequelize, DataTypes);
 const Address = require("../data/AddressModel")(sequelize, DataTypes);
 const Parking = require("../data/ParkingModel")(sequelize, DataTypes);

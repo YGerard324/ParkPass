@@ -1,8 +1,8 @@
-class ClientRepositoryInterface {
+class UserRepositoryInterface {
   constructor() {
-    if (new.target === ClientRepositoryInterface) {
+    if (new.target === UserRepositoryInterface) {
       throw new Error(
-        "Não foi possível instanciar ClientRepositoryInterface."
+        "Não foi possível instanciar UserRepositoryInterface."
       );
     }
   }
@@ -25,4 +25,4 @@ class ClientRepositoryInterface {
   }
 }
 
-module.exports = ClientRepositoryInterface;
+module.exports = UserRepositoryInterface;
