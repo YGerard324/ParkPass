@@ -1,5 +1,4 @@
-const AdminRepository = require("./src/repository/AdminRepository");
-const ClientRepository = require("./src/repository/ClientRepository");
+const UserRepository = require("./src/repository/UserRepository");
 const AddressRepository = require("./src/repository/AddressRepository");
 const ParkingRepository = require("./src/repository/ParkingRepository");
 const PaymentRepository = require("./src/repository/PaymentRepository");
@@ -12,47 +11,29 @@ class App {
     }
 
     async init() {
-
-        try {
-
-            let adminRepository = new AdminRepository();
-
-            for (let i = 1; i <= 10; i++) {
-
-                let admin = {
-                name: faker.person.fullName(),
-                email: faker.internet.email(),
-                password: faker.internet.password()
-                };
-                await adminRepository.add(admin);
-            }
-
-        } catch (error) {
-            console.error("Erro na inicialização do Admin", error);
-        }
-
         try {
             let cpf = "CPF";
             let cnpj = "CNPJ";
 
-            let clientRepository = new ClientRepository();
+            let userRepository = new UserRepository();
             
             for (let i = 1; i <= 10; i++) {
             const tipo = Math.random() < 0.5 ? cpf : cnpj;
 
-                let client = {
+                let user = {
                 name: faker.person.fullName(),
                 email: faker.internet.email(),
                 password: faker.internet.password(),
                 document: faker.number.int(),
                 document_type: tipo,
-                phone: faker.phone.number()
+                phone: faker.phone.number(),
+                acess_level: faker.number.int({ min: 0, max: 1 })
                 };
-                await clientRepository.add(client);
+                await userRepository.add(user);
             }
 
         } catch (error) {
-            console.error("Erro na inicialização do Client", error);
+            console.error("Erro na inicialização do User", error);
         }
         try {
             let addressRepository = new AddressRepository();
@@ -62,7 +43,7 @@ class App {
                         neighborhood: faker.location.state(),
                         city: faker.location.city(),
                         zip_code: faker.location.zipCode(),
-                        client_id: faker.number.int({ min: 1, max: 10 })
+                        user_id: faker.number.int({ min: 1, max: 10 })
                 };
                 await addressRepository.add(address);   
             }
@@ -143,7 +124,7 @@ class App {
                 entry: faker.date.between({ from: '2024-05-15T00:00:00.000Z', to: '2024-05-15T00:23:59.000Z' }),
                 exit: faker.date.between({ from: '2024-05-15T00:00:00.000Z', to: '2024-05-15T00:23:59.000Z' }),
                 parking_space_id: faker.number.int({ min: 1, max: 10 }),
-                client_id: faker.number.int({ min: 1, max: 10 }),
+                user_id: faker.number.int({ min: 1, max: 10 }),
                 payment_id: faker.number.int({ min: 1, max: 10 }),
             };
                 await registerRepository.add(register);

@@ -1,6 +1,5 @@
 const express = require("express");
-const adminRouter = require("./src/routes/AdminRouter");
-const clientRouter = require("./src/routes/ClientRouter");
+const userRouter = require("./src/routes/UserRouter");
 const addressRouter = require("./src/routes/AddressRouter");
 const parkingRouter = require("./src/routes/ParkingRouter");
 const parkingSpaceRouter = require("./src/routes/ParkingSpaceRouter");
@@ -12,8 +11,7 @@ const authRouter = require("./src/routes/AuthRouter");
 const app = express();
 const port = 3000;
 app.use(express.json());
-app.use("/admin", adminRouter);
-app.use("/client", clientRouter);
+app.use("/user", userRouter);
 app.use("/address", addressRouter);
 app.use("/parking", parkingRouter);
 app.use("/parkingSpace", parkingSpaceRouter);

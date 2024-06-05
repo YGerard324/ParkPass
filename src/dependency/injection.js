@@ -1,22 +1,12 @@
-// Admin
-const AdminRepository = require("../repository/AdminRepository");
-const AdminApplication = require("../application/AdminApplication");
-const AdminFacade = require("../facade/AdminFacade");
+// User
+const UserRepository = require("../repository/UserRepository");
+const UserApplication = require("../application/UserApplication");
+const UserFacade = require("../facade/UserFacade");
 
-const adminRepository = new AdminRepository();
-const adminApplication = new AdminApplication(adminRepository);
-const adminFacade = new AdminFacade(adminApplication);
-// Admin
-
-// Client
-const ClientRepository = require("../repository/ClientRepository");
-const ClientApplication = require("../application/ClientApplication");
-const ClientFacade = require("../facade/ClientFacade");
-
-const clientRepository = new ClientRepository();
-const clientApplication = new ClientApplication(clientRepository);
-const clientFacade = new ClientFacade(clientApplication);
-//Client
+const userRepository = new UserRepository();
+const userApplication = new UserApplication(userRepository);
+const userFacade = new UserFacade(userApplication);
+//User
 
 // Address
 const AddressRepository = require("../repository/AddressRepository");
@@ -79,8 +69,7 @@ const parkingSpaceFacade = new ParkingSpaceFacade(parkingSpaceApplication);
 // ParkingSpaces
 
 module.exports = {
-  adminFacade,
-  clientFacade,
+  userFacade,
   addressFacade,
   parkingFacade,
   paymentFacade,
