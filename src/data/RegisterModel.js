@@ -21,11 +21,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      client_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
       payment_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },

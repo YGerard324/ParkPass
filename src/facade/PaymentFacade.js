@@ -21,6 +21,11 @@ class PaymentFacade {
   async delete(id) {
     return await this.PaymentApplication.delete(id);
   }
+
+  async makePayment(data) {
+    console.log("Making payment..." , data);
+    return await this.PaymentApplication.makePayment(data);
+  }
 }
 
 module.exports = PaymentFacade;

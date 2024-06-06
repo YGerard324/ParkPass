@@ -32,6 +32,7 @@ const parkingFacade = new ParkingFacade(parkingApplication);
 const PaymentRepository = require("../repository/PaymentRepository");
 const PaymentApplication = require("../application/PaymentApplication");
 const PaymentFacade = require("../facade/PaymentFacade");
+const PaymentFactory = require("../factory/PaymentFactory");
 
 const paymentRepository = new PaymentRepository();
 const paymentApplication = new PaymentApplication(paymentRepository);
