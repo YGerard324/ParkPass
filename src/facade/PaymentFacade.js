@@ -23,7 +23,6 @@ class PaymentFacade {
   }
 
   async makePayment(data) {
-    console.log("Making payment..." , data);
     return await this.PaymentApplication.makePayment(data);
   }
 }

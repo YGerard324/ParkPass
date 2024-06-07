@@ -1,3 +1,7 @@
+const RegisterFacade = require("../facade/RegisterFacade");
+const PaymentFactory = require("../factory/PaymentFactory");
+const RegisterFactory = require("../factory/RegisterFactory");
+
 class PaymentApplication {
   constructor(PaymentRepository) {
     this.PaymentRepository = PaymentRepository;
@@ -6,6 +10,7 @@ class PaymentApplication {
   async add(data) {
     return await this.PaymentRepository.add(data);
   }
+
   async getById(code) {
     return await this.PaymentRepository.getById(code);
   }
@@ -23,12 +28,17 @@ class PaymentApplication {
   }
 
   async makePayment(data) {
-    console.log("Data price:" , data.price.value);
-    console.log("Payment_type:",data.payment_type.type);
-    console.log("Payment id:", data.register.payment_id);
-    return await this.PaymentFactory.createPayment(data);
-  }
 
+    const { price, payment_type, register } = data;
+    const { value } = price;
+    const { type } = payment_type;
+    const { entry, exit , parking_space_id, user_id, payment_id } = register;
+
+    await new RegisterFactory(entry, exit, parking_space_id, user_id);
+    await new PaymentFactory(type, value).createPayment();
+  }
 }
+
+
 
 module.exports = PaymentApplication;
