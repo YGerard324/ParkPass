@@ -28,17 +28,6 @@ const parkingApplication = new ParkingApplication(parkingRepository);
 const parkingFacade = new ParkingFacade(parkingApplication);
 //Parking
 
-// Payment
-const PaymentRepository = require("../repository/PaymentRepository");
-const PaymentApplication = require("../application/PaymentApplication");
-const PaymentFacade = require("../facade/PaymentFacade");
-const PaymentFactory = require("../factory/PaymentFactory");
-
-const paymentRepository = new PaymentRepository();
-const paymentApplication = new PaymentApplication(paymentRepository);
-const paymentFacade = new PaymentFacade(paymentApplication);
-// Payment
-
 // Register
 const RegisterRepository = require("../repository/RegisterRepository");
 const RegisterApplication = require("../application/RegisterApplication");
@@ -69,6 +58,16 @@ const parkingSpaceApplication = new ParkingSpaceApplication(parkingSpaceReposito
 const parkingSpaceFacade = new ParkingSpaceFacade(parkingSpaceApplication);
 // ParkingSpaces
 
+// Payment
+const PaymentRepository = require("../repository/PaymentRepository");
+const PaymentApplication = require("../application/PaymentApplication");
+const PaymentFacade = require("../facade/PaymentFacade");
+
+const paymentRepository = new PaymentRepository();
+const paymentApplication = new PaymentApplication(paymentRepository, paymentTypeRepository, userRepository, parkingSpaceRepository);
+const paymentFacade = new PaymentFacade(paymentApplication);
+// Payment
+
 module.exports = {
   userFacade,
   addressFacade,
@@ -77,5 +76,4 @@ module.exports = {
   registerFacade,
   paymentTypeFacade,
   parkingSpaceFacade,
-  PaymentFactory,
 };

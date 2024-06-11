@@ -1,29 +1,29 @@
 class PaymentFacade {
-  constructor(PaymentApplication) {
-    this.PaymentApplication = PaymentApplication;
+  constructor(paymentApplication) {
+    this.paymentApplication = paymentApplication;
   }
 
   async add(data) {
-    return await this.PaymentApplication.add(data);
+    return await this.paymentApplication.add(data);
   }
   async getById(id) {
-    return await this.PaymentApplication.getById(id);
+    return await this.paymentApplication.getById(id);
   }
 
   async getAll() {
-    return await this.PaymentApplication.getAll();
+    return await this.paymentApplication.getAll();
   }
 
   async update(data) {
-    return await this.PaymentApplication.update(data);
+    return await this.paymentApplication.update(data);
   }
 
   async delete(id) {
-    return await this.PaymentApplication.delete(id);
+    return await this.paymentApplication.delete(id);
   }
 
-  async makePayment(data) {
-    return await this.PaymentApplication.makePayment(data);
+  async registerPayment(data) {
+    return await this.paymentApplication.registerPayment(data);
   }
 }
 

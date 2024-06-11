@@ -1,29 +1,29 @@
 class UserFacade {
-  constructor(UserApplication) {
-    this.UserApplication = UserApplication;
+  constructor(userApplication) {
+    this.userApplication = userApplication;
   }
 
   async add(data) {
-    return await this.UserApplication.add(data);
+    return await this.userApplication.add(data);
   }
   async getById(id) {
-    return await this.UserApplication.getById(id);
+    return await this.userApplication.getById(id);
   }
 
   async getAll() {
-    return await this.UserApplication.getAll();
+    return await this.userApplication.getAll();
   }
 
   async login(email, password) {
-    return await this.AdminApplication.authenticate(email, password); 
+    return await this.userApplication.authenticate(email, password); 
   }
 
   async update(data) {
-    return await this.UserApplication.update(data);
+    return await this.userApplication.update(data);
   }
 
   async delete(id) {
-    return await this.UserApplication.delete(id);
+    return await this.userApplication.delete(id);
   }
 }
 

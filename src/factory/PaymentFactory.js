@@ -1,57 +1,42 @@
-const PaymentTypeRepository = require("../repository/PaymentTypeRepository");
-const {
-  CreditCardPayment,
-  DebitCardPayment,
-  CashPayment,
-  PixPayment,
-  BankSlipPayment,
-  OtherPayment,
-} = require("./PaymentAbstract");
-
-const paymentType = new PaymentTypeRepository();
-
+const CashPayment = require("./CashPayment");
+const CreditCardPayment = require("./CreditCardPayment");
+const BankSlipPayment = require("./BankSlipPayment");
+const PixPayment = require("./PixPayment");
+const DebitCardPayment = require("./DebitCardPayment");
+const OtherPayment = require("./OtherPayment");
 class PaymentFactory {
-  constructor(type, value) {
+  constructor(payment_type, value) {
     this.value = value;
-    this.payment_type = type;
+    this.payment_type = payment_type;
   }
+
   async createPayment() {
-    if (this.value === null || this.payment_type === null) {
+    if (this.value === null || this.payment_type.id === null) {
       throw new Error("Não foi possível criar o pagamento");
-    }
-
-    const paymentTypes = await paymentType.getAll();
-    const validPaymentType = paymentTypes.find(
-      (pt) => pt.payment === this.payment_type
-    );
-
-    if (!validPaymentType) {
-      throw new Error("Nenhum pagamento informado!");
     } else {
-
-    switch (this.payment_type) {
-      case "CreditCard":
-        return new CreditCardPayment(this.value).getPaid();
-        break;
-      case "DebitCard":
-        return new DebitCardPayment(this.value).getPaid();
-        break;
-      case "Cash":
-        return new CashPayment(this.value).getPaid();
-        break;
-      case "PIX":
-        return new PixPayment(this.value).getPaid();
-        break;
-      case "BankSlip":
-        return new BankSlipPayment(this.value).getPaid();
-        break;
-      case "Other":
-        return new OtherPayment(this.value);
-        break;
-      default:
-        throw new Error("Tipo de pagamento não encontrado");
+      switch (this.payment_type.id) {
+        case 1:
+          return new CashPayment(this.value).getPaid();
+          break;
+        case 2:
+          return new CreditCardPayment(this.value).getPaid();
+          break;
+        case 3:
+          return new BankSlipPayment(this.value).getPaid();
+          break;
+        case 4:
+          return new PixPayment(this.value).getPaid();
+          break;
+        case 5:
+          return new DebitCardPayment(this.value).getPaid();
+          break;
+        case 6:
+          return new OtherPayment(this.value);
+          break;
+        default:
+          throw new Error("Tipo de pagamento não encontrado");
+      }
     }
-  }
   }
 }
 

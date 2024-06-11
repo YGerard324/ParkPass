@@ -1,19 +1,21 @@
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
 class UserApplication {
-  constructor(UserRepository) {
-    this.UserRepository = UserRepository;
+  constructor(userRepository) {
+    this.userRepository = userRepository;
   }
 
   async add(data) {
-    return await this.UserRepository.add(data);
+    return await this.userRepository.add(data);
   }
   async getById(id) {
-    return await this.UserRepository.getById(id);
+    return await this.userRepository.getById(id);
   }
 
   async authenticate(email, password) {
-    const users = await this.UserRepository.getAll();
+    const users = await this.userRepository.getAll();
     const user = users.find((user) => user.email === email);
-    console.log("user : ", user.id, user.name, user.email, user.password);
     if (!user) {
       throw new Error("O email informado não foi cadastrado");
     }
@@ -33,17 +35,16 @@ class UserApplication {
 
     return token;
   }
-
   async getAll() {
-    return await this.UserRepository.getAll();
+    return await this.userRepository.getAll();
   }
 
   async update(data) {
-    return await this.UserRepository.update(data);
+    return await this.userRepository.update(data);
   }
 
   async delete(id) {
-    return await this.UserRepository.delete(id);
+    return await this.userRepository.delete(id);
   }
 }
 

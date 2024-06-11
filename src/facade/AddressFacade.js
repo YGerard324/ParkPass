@@ -1,25 +1,25 @@
 class AddressFacade {
-  constructor(AddressApplication) {
-    this.AddressApplication = AddressApplication;
+  constructor(addressApplication) {
+    this.addressApplication = addressApplication;
   }
 
   async add(data) {
-    return await this.AddressApplication.add(data);
+    return await this.addressApplication.add(data);
   }
   async getById(id) {
-    return await this.AddressApplication.getById(id);
+    return await this.addressApplication.getById(id);
   }
 
   async getAll() {
-    return await this.AddressApplication.getAll();
+    return await this.addressApplication.getAll();
   }
 
   async update(data) {
-    return await this.AddressApplication.update(data);
+    return await this.addressApplication.update(data);
   }
 
   async delete(id) {
-    return await this.AddressApplication.delete(id);
+    return await this.addressApplication.delete(id);
   }
 }
 

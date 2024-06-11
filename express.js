@@ -7,15 +7,16 @@ const paymentRouter = require("./src/routes/PaymentRouter");
 const paymentTypeRouter = require("./src/routes/PaymentTypeRouter");
 const registerRouter = require("./src/routes/RegisterRouter");
 const authRouter = require("./src/routes/AuthRouter");
+const isAuth = require("./src/middleware/IsAuth");
 
 const app = express();
 const port = 3000;
 app.use(express.json());
-app.use("/user", userRouter);
+app.use("/user", isAuth, userRouter);
 app.use("/address", addressRouter);
 app.use("/parking", parkingRouter);
 app.use("/parkingSpace", parkingSpaceRouter);
-app.use("/payment", paymentRouter);
+app.use("/payment", isAuth, paymentRouter);
 app.use("/paymentType", paymentTypeRouter);
 app.use("/register", registerRouter);
 app.use("/auth", authRouter);

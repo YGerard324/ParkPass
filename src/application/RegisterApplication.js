@@ -1,25 +1,25 @@
 class RegisterApplication {
-  constructor(RegisterRepository) {
-    this.RegisterRepository = RegisterRepository;
+  constructor(registerRepository) {
+    this.registerRepository = registerRepository;
   }
 
   async add(data) {
-    return await this.RegisterRepository.add(data);
+    return await this.registerRepository.add(data);
   }
   async getById(id) {
-    return await this.RegisterRepository.getById(id);
+    return await this.registerRepository.getById(id);
   }
 
   async getAll() {
-    return await this.RegisterRepository.getAll();
+    return await this.registerRepository.getAll();
   }
 
   async update(data) {
-    return await this.RegisterRepository.update(data);
+    return await this.registerRepository.update(data);
   }
 
   async delete(id) {
-    return await this.RegisterRepository.delete(id);
+    return await this.registerRepository.delete(id);
   }
 }
 

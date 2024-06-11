@@ -3,7 +3,7 @@ const PaymentController = require ("../controller/PaymentController");
 const router = express.Router();
 
 
-router.get("/makePayment" , PaymentController.makePayment);
+router.get("/registerPayment" , PaymentController.registerPayment);
 
 router.get("/:id", PaymentController.getById);
 router.put("/:id" , PaymentController.update);

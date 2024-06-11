@@ -1,44 +1,59 @@
-const RegisterFacade = require("../facade/RegisterFacade");
 const PaymentFactory = require("../factory/PaymentFactory");
-const RegisterFactory = require("../factory/RegisterFactory");
-
 class PaymentApplication {
-  constructor(PaymentRepository) {
-    this.PaymentRepository = PaymentRepository;
+  constructor(paymentRepository, paymentTypeRepository, userRepository, parkingSpaceRepository) {
+    this.paymentRepository = paymentRepository;
+    this.paymentTypeRepository = paymentTypeRepository;
+    this.userRepository = userRepository;
+    this.parkingSpaceRepository = parkingSpaceRepository;
   }
 
-  async add(data) {
-    return await this.PaymentRepository.add(data);
+   async add(data) {
+    return await this.paymentRepository.add(data);
   }
 
   async getById(code) {
-    return await this.PaymentRepository.getById(code);
+    return await this.paymentRepository.getById(code);
   }
 
   async getAll() {
-    return await this.PaymentRepository.getAll();
+    return await this.paymentRepository.getAll();
   }
 
   async update(data) {
-    return await this.PaymentRepository.update(data);
+    return await this.paymentRepository.update(data);
   }
 
   async delete(code) {
-    return await this.PaymentRepository.delete(code);
+    return await this.paymentRepository.delete(code);
   }
 
-  async makePayment(data) {
+  async registerPayment(data) {
+    const { price, payment_type } = data;
 
-    const { price, payment_type, register } = data;
+    if (!price || !payment_type) {
+      throw new Error("Missing required payment data");
+    }
+
     const { value } = price;
-    const { type } = payment_type;
-    const { entry, exit , parking_space_id, user_id, payment_id } = register;
+    const { paymentType } = payment_type;
 
-    await new RegisterFactory(entry, exit, parking_space_id, user_id);
-    await new PaymentFactory(type, value).createPayment();
+    if (!paymentType) {
+      throw new Error("Missing payment type");
+    }
+
+    let paymentTypeId = await this.paymentTypeRepository.getById(paymentType);
+    let paymentFactory = new PaymentFactory(paymentTypeId, value);
+    let object = await paymentFactory.createPayment();
+
+    return object;
+  }
+
+  async proofOfPayment() {}
+
+  async makePayment() {
+    let data = await this.registerPayment();
+    return proofOfPayment(data);
   }
 }
-
-
 
 module.exports = PaymentApplication;

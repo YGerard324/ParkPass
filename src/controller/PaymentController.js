@@ -5,8 +5,8 @@ module.exports.add = async (req, res) => {
     res.status(200).json(row);
 };
 
-module.exports.makePayment = async (req, res) => {
-    let row = await paymentFacade.makePayment(req.body);
+module.exports.registerPayment = async (req, res) => {
+    let row = await paymentFacade.registerPayment(req.body);
     res.status(200).json(row);
 };
 

@@ -1,25 +1,25 @@
 class ParkingSpaceFacade {
-  constructor(ParkingSpaceApplication) {
-    this.ParkingSpaceApplication = ParkingSpaceApplication;
+  constructor(parkingSpaceApplication) {
+    this.parkingSpaceApplication = parkingSpaceApplication;
   }
 
   async add(data) {
-    return await this.ParkingSpaceApplication.add(data);
+    return await this.parkingSpaceApplication.add(data);
   }
   async getById(id) {
-    return await this.ParkingSpaceApplication.getById(id);
+    return await this.parkingSpaceApplication.getById(id);
   }
 
   async getAll() {
-    return await this.ParkingSpaceApplication.getAll();
+    return await this.parkingSpaceApplication.getAll();
   }
 
   async update(data) {
-    return await this.ParkingSpaceApplication.update(data);
+    return await this.parkingSpaceApplication.update(data);
   }
 
   async delete(id) {
-    return await this.ParkingSpaceApplication.delete(id);
+    return await this.parkingSpaceApplication.delete(id);
   }
 }
 
