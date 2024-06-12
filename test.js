@@ -1,106 +1,86 @@
-const AdminRepository = require("./src/repository/AdminRepository");
-const ClienteRepository = require("./src/repository/ClienteRepository");
-const EnderecoRepository = require("./src/repository/EnderecoRepository");
-const EstacionamentoRepository = require("./src/repository/EstacionamentoRepository");
-const PagamentoRepository = require("./src/repository/PagamentoRepository");
-const RegistroRepository = require("./src/repository/RegistroRepository");
-const TipoPagamentoRepository = require("./src/repository/TipoPagamentoRepository");
-const VagaRepository = require("./src/repository/VagaRepository");
+const UserRepository = require("./src/repository/UserRepository");
+const AddressRepository = require("./src/repository/AddressRepository");
+const ParkingRepository = require("./src/repository/ParkingRepository");
+const PaymentRepository = require("./src/repository/PaymentRepository");
+const RegisterRepository = require("./src/repository/RegisterRepository");
+const PaymentTypeRepository = require("./src/repository/PaymentTypeRepository");
+const ParkingSpaceRepository = require("./src/repository/ParkingSpaceRepository");
 const { faker } = require('@faker-js/faker');
 class App {
     constructor() {
     }
 
     async init() {
-
-        try {
-
-            let adminRepository = new AdminRepository();
-            // let registroRepository = new RegistroRepository();
-            // let tipoPagamentoRepository = new TipoPagamentoRepository();
-            // let vagaRepository = new VagaRepository();
-
-            for (let i = 1; i <= 10; i++) {
-
-                let admin = {
-                name: faker.person.fullName(),
-                email: faker.internet.email(),
-                password: faker.internet.password()
-                };
-                await adminRepository.add(admin);
-            }
-
-        } catch (error) {
-            console.error("Erro na inicialização do Admin", error);
-        }
-
         try {
             let cpf = "CPF";
             let cnpj = "CNPJ";
 
-            let clienteRepository = new ClienteRepository();
+            let userRepository = new UserRepository();
             
             for (let i = 1; i <= 10; i++) {
             const tipo = Math.random() < 0.5 ? cpf : cnpj;
 
-                let cliente = {
+                let user = {
                 name: faker.person.fullName(),
                 email: faker.internet.email(),
                 password: faker.internet.password(),
-                documento: faker.number.int(),
-                tipoDocumento: tipo,
-                telefone: faker.phone.number()
+                document: faker.number.int(),
+                document_type: tipo,
+                phone: faker.phone.number(),
+                access_level: faker.number.int({ min: 0, max: 1 })
                 };
-                await clienteRepository.add(cliente);
+
+
+                await userRepository.add(user);
             }
 
         } catch (error) {
-            console.error("Erro na inicialização do Cliente", error);
+            console.error("Erro na inicialização do User", error);
         }
         try {
-            let enderecoRepository = new EnderecoRepository();
+            let addressRepository = new AddressRepository();
                 for (let i = 1; i <= 10; i++) {
-                    let endereco = {
-                        logradouro: faker.location.streetAddress({ useFullAddress: true }),
-                        bairro: faker.location.state(),
-                        cidade: faker.location.city(),
-                        cep: faker.location.zipCode(),
-                        cliente_id: faker.number.int({ min: 1, max: 10 })
+                    let address = {
+                        public_place: faker.location.streetAddress({ useFullAddress: true }),
+                        neighborhood: faker.location.state(),
+                        city: faker.location.city(),
+                        zip_code: faker.location.zipCode(),
+                        user_id: faker.number.int({ min: 1, max: 10 })
                 };
-                await enderecoRepository.add(endereco);   
+                await addressRepository.add(address);   
             }
      } catch (error) {
             console.error("Erro na inicialização do Endereço", error);
         }
 
         try {
-            let estacionamentoRepository = new EstacionamentoRepository();
+            let parkingRepository = new ParkingRepository();
              for (let i = 1; i <= 10; i++) {
-                let estacionamento = {
+                let parking = {
                 name: faker.company.name(),
                 cnpj: faker.number.int(),
-                logradouro: faker.location.streetAddress({ useFullAddress: true }),
-                bairro: faker.location.state(),
-                cidade: faker.location.city(),
-                cep: faker.location.zipCode(),
+                public_place: faker.location.streetAddress({ useFullAddress: true }),
+                neighborhood: faker.location.state(),
+                city: faker.location.city(),
+                zip_code: faker.location.zipCode(),
                 admin_id: faker.number.int({ min: 1, max: 10 })
                 };
-                await estacionamentoRepository.add(estacionamento);
+                await parkingRepository.add(parking);
             }
             
         } catch (error) {
-            console.error("Erro na inicialização do Estacionamento", error);
+            console.error("Erro na inicialização do Parking", error);
         }
 
         try {
-            let vagaRepository = new VagaRepository();
+            let parkingSpaceRepository = new ParkingSpaceRepository();
              for (let i = 1; i <= 10; i++) {
-                let vaga = {
-                tipoVaga: faker.datatype.boolean({ probability: 0.5 }) ? 'MOTO' : 'CARRO',
-                cobertura: faker.datatype.boolean({ probability: 0.5 }),
-                estacionamento_id: faker.number.int({ min: 1, max: 10 })
+                let parkingSpace = {
+                vacancy_type: faker.datatype.boolean({ probability: 0.5 }) ? 'MOTO' : 'CARRO',
+                roof: faker.datatype.boolean({ probability: 0.5 }),
+                parking_id: faker.number.int({ min: 1, max: 10 })
                 };
-                await vagaRepository.add(vaga);
+                await parkingSpaceRepository.add(parkingSpace);
             }
 
         } catch (error) {
@@ -108,14 +88,14 @@ class App {
         }
 
         try {
-            let tipoPagamentoRepository = new TipoPagamentoRepository();
+            let paymentTypeRepository = new PaymentTypeRepository();
 
-            const formasPagamento = ['DINHEIRO', 'CARTAO DE CREDITO', 'BOLETO', 'PIX', 'CARTAO DE DEBITO', 'OUTROS'];
-            for (let forma of formasPagamento) {
-                let tipoPagamento = {
-                    forma_pagamento: forma,
+            const payments = ['DINHEIRO', 'CARTAO DE CREDITO', 'BOLETO', 'PIX', 'CARTAO DE DEBITO', 'OUTROS'];
+            for (let type of payments) {
+                let paymentType = {
+                    payment: type,
                 };
-                await tipoPagamentoRepository.add(tipoPagamento);
+                await paymentTypeRepository.add(paymentType);
             }
   
 
@@ -124,32 +104,32 @@ class App {
         }
 
         try {
-            let pagamentoRepository = new PagamentoRepository();
+            let paymentRepository = new PaymentRepository();
              for (let i = 1; i <= 10; i++) {
-                let pagamento = {
-                valor: faker.number.float({ min: 1, max: 10, multipleOf: 0.01 }),
-                tipoPagamento_id: 1,
-                registro_id: i
+                let payment = {
+                value: faker.number.float({ min: 1, max: 10, multipleOf: 0.01 }),
+                payment_type_id: 1,
+                register_id: i
                 };
-                await pagamentoRepository.add(pagamento);
+                await paymentRepository.add(payment);
             }
 
         } catch (error) {
-            console.error("Erro na inicialização do Pagamento", error);
+            console.error("Erro na inicialização do Payment", error);
         }
 
 
         try {
-            let registroRepository = new RegistroRepository();
+            let registerRepository = new RegisterRepository();
              for (let i = 1; i <= 10; i++) {
-                let registro = {
-                entrada: faker.date.between({ from: '2024-05-15T00:00:00.000Z', to: '2024-05-15T00:23:59.000Z' }),
-                saida: faker.date.between({ from: '2024-05-15T00:00:00.000Z', to: '2024-05-15T00:23:59.000Z' }),
-                vaga_id: faker.number.int({ min: 1, max: 10 }),
-                cliente_id: faker.number.int({ min: 1, max: 10 }),
-                pagamento_id: faker.number.int({ min: 1, max: 10 }),
+                let register = {
+                entry: faker.date.between({ from: '2024-05-15T00:00:00.000Z', to: '2024-05-15T00:23:59.000Z' }),
+                exit: faker.date.between({ from: '2024-05-15T00:00:00.000Z', to: '2024-05-15T00:23:59.000Z' }),
+                parking_space_id: faker.number.int({ min: 1, max: 10 }),
+                user_id: faker.number.int({ min: 1, max: 10 }),
+                payment_id: faker.number.int({ min: 1, max: 10 }),
             };
-                await registroRepository.add(registro);
+                await registerRepository.add(register);
             }
 
         } catch (error) {

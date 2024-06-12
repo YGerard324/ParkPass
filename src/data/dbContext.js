@@ -12,16 +12,13 @@ const sequelize = new Sequelize(
   }
 );
 
-const Admin = require("../data/Admin")(sequelize, DataTypes);
-const Cliente = require("../data/Cliente")(sequelize, DataTypes);
-const Endereco = require("../data/Endereco")(sequelize, DataTypes);
-const Estacionamento = require("../data/Estacionamento")(sequelize, DataTypes);
-const Pagamento = require("../data/Pagamento")(sequelize, DataTypes);
-const Registro = require("../data/Registro")(sequelize, DataTypes);
-const TipoPagamento = require("../data/TipoPagamento")(sequelize, DataTypes);
-const Vaga = require("../data/Vaga")(sequelize, DataTypes);
-
-
+const User = require("../data/UserModel")(sequelize, DataTypes);
+const Address = require("../data/AddressModel")(sequelize, DataTypes);
+const Parking = require("../data/ParkingModel")(sequelize, DataTypes);
+const Payment = require("../data/PaymentModel")(sequelize, DataTypes);
+const Register = require("../data/RegisterModel")(sequelize, DataTypes);
+const PaymentType = require("../data/PaymentTypeModel")(sequelize, DataTypes);
+const ParkingSpace = require("../data/ParkingSpaceModel")(sequelize, DataTypes);
 
 sequelize
   .authenticate()
@@ -41,98 +38,62 @@ sequelize
     console.log("Erros: " + err);
   });
 
-  Admin.hasMany(Estacionamento, {
-    foreignKey: "admin_id",
-    as: "estacionamentos", // alias para a relação
-  });
-  Estacionamento.belongsTo(Admin, {
-    foreignKey: "admin_id",
-    as: "admin", // alias para a relação
-  });
+Parking.hasMany(ParkingSpace, {
+  foreignKey: "parking_id",
+  as: "parkingspaces", 
+});
+ParkingSpace.belongsTo(Parking, {
+  foreignKey: "parking_id",
+  as: "parkings",
+});
 
-  Estacionamento.hasMany(Vaga, {
-    foreignKey: "estacionamento_id",
-    as: "vagas", // alias para a relação
-  });
-  Vaga.belongsTo(Estacionamento, {
-    foreignKey: "estacionamento_id",
-    as: "estacionamento", // alias para a relação
-  });
+ParkingSpace.hasMany(Register, {
+  foreignKey: "parking_space_id",
+  as: "registers", 
+});
+Register.belongsTo(ParkingSpace, {
+  foreignKey: "parking_space_id",
+  as: "parkingspace", 
+});
 
-  Vaga.hasMany(Registro, {
-    foreignKey: "vaga_id",
-    as: "registros", // alias para a relação
-  });
-  Registro.belongsTo(Vaga, {
-    foreignKey: "vaga_id",
-    as: "vaga", // alias para a relação
-  });
-  
-  Registro.hasMany(Pagamento, {
-    foreignKey: "registro_id",
-    as: "pagamentos", // alias para a relação
-  });
-  Pagamento.belongsTo(Registro, {
-    foreignKey: "registro_id",
-    as: "registro", // alias para a relação
-  });
-  
-  Cliente.hasMany(Registro, {
-    foreignKey: "cliente_id",
-    as: "registros", // alias para a relação
-  });
-  Registro.belongsTo(Cliente, {
-    foreignKey: "cliente_id",
-    as: "cliente", // alias para a relação
-  });
+Register.hasMany(Payment, {
+  foreignKey: "register_id",
+  as: "payments", 
+});
 
-  TipoPagamento.hasMany(Pagamento, {
-    foreignKey: "tipoPagamento_id",
-    as: "pagamentos", // alias para o relacionamento
-  });
-  Pagamento.belongsTo(TipoPagamento, {
-    foreignKey: "tipoPagamento_id",
-    as: "tipoPagamento", // alias para o relacionamento
-  });
+User.hasMany(Register, {
+  foreignKey: "user_id",
+  as: "registers", 
+});
+Register.belongsTo(User, {
+  foreignKey: "user_id",
+  as: "users", 
+});
 
-  Cliente.hasMany(Endereco, {
-    foreignKey: "cliente_id",
-    as: "enderecos", // alias para a relacionamento
-  });
-  Endereco.belongsTo(Cliente, {
-    foreignKey: "cliente_id",
-    as: "cliente", // alias para a relacionamento
-  }); 
-  
+PaymentType.hasMany(Payment, {
+  foreignKey: "payment_type_id",
+  as: "payments", 
+});
+Payment.belongsTo(PaymentType, {
+  foreignKey: "payment_type_id",
+  as: "payment_types", 
+});
 
+User.hasMany(Address, {
+  foreignKey: "user_id",
+  as: "addresses", 
+});
+Address.belongsTo(User, {
+  foreignKey: "user_id",
+  as: "users", 
+});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-module.exports = { Admin, Estacionamento, Endereco, Cliente, Pagamento, Registro, TipoPagamento, Vaga };
+module.exports = {
+  Parking,
+  Address,
+  User,
+  Payment,
+  Register,
+  PaymentType,
+  ParkingSpace,
+};
