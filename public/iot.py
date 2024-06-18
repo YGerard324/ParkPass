@@ -5,7 +5,7 @@ import json
 jwt_endpoint_url = 'http://localhost:3000/auth/login'
 
 payload_data = {
-    "email": "teste@gmail.com",
+    "email": "jeftest@gmail.com",
     "password": "123"
 }
 
